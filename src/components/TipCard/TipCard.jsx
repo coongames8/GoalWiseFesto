@@ -5,18 +5,23 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 
-export default function TipCard({tip, isAdmin, timeSlot, plan}) {
+export default function TipCard({tip, isAdmin, timeSlot, plan, today}) {
     const [hidden, setHidden] = useState(true);
 
     useEffect(() => {
-        if (plan === null || (plan.timeSlot !== timeSlot)) {
-            setHidden(true);
-        } else {
-            if (plan.type !== tip.type) {
+        if(tip.date === today) {
+            if (plan === null || (plan.timeSlot !== timeSlot)) {
+                //
                 setHidden(true);
             } else {
-                setHidden(false);
+                if (plan.type !== tip.type) {
+                    setHidden(true);
+                } else {
+                    setHidden(false);
+                }
             }
+        } else {
+            setHidden(false);
         }
     }, [plan, timeSlot, tip.type]);
 
