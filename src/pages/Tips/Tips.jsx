@@ -48,6 +48,7 @@ const handleIcons = () => {
   setLastIcon(maxScrollableWidth > scrollVal + 1 ? "flex" : "none");
 };
 
+
 const handleClick = (direction) => {
   const scrollAmount = direction === "left" ? -350 : 350;
   tabBoxRef.current.scrollLeft += scrollAmount;
@@ -115,14 +116,6 @@ useEffect(() => {
   };
 }, [isDragging, startX, scrollLeft]);
 
-// Initial call to handleIcons to set the icon visibility on component mount
-useEffect(() => {
-  setTimeout(() => {
-    const tabBox = tabBoxRef.current;
-    tabBox.scrollLeft = tabBox.scrollWidth - tabBox.clientWidth;
-    handleIcons();
-  }, 1000);
-}, []);
 
 // Fetch orderTrackingId and orderMerchantReference from query params
 useEffect(() => {
@@ -177,6 +170,15 @@ useEffect(() => {
 useEffect(() => {
   days && setCurrentDate(days[days.length - 1]);
 }, [days]);
+
+
+useEffect(() => {
+  if (!tabBoxRef.current) return;
+  const tabBox = tabBoxRef.current;
+  tabBox.scrollLeft = tabBox.scrollWidth - tabBox.clientWidth;
+  handleIcons();
+}, [tabBoxRef.current]); // Depend on `tabBoxRef.current`
+
 
 useEffect(() =>{
   getTips(setTips, setLoading, formatDate(currentDate));
@@ -288,7 +290,7 @@ useEffect(() => {
                 {filteredTip.items && filteredTip.items.filter(doc => doc.type === gamesType).length !== 0 && (<h2 className='title'>{timeSlotDescription}</h2>)}
                 <div className="tips-content container">
                   {filteredTip.items.filter(doc => doc.type === gamesType).map((tip, index) => (
-                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} plan={user && user.plan ? user.plan : null}/>
+                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} plan={user && user.plan ? user.plan : null} today={formatDate(days[days.length - 1])}/>
                   ))}
                 </div>
               </div>
