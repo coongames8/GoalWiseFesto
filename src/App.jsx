@@ -87,7 +87,7 @@ function App() {
             
             <Route path="pricing" element={<Pricing />} />
             <Route path="subscribe" element={<ProtectedRoute><Subscription /></ProtectedRoute>} />
-            <Route path="plans" element={<Plans />} />
+            <Route path="plans" element={<ProtectedPricingRoute><Plans /></ProtectedPricingRoute>} />
             <Route path="pay" element={<Pay />} />
 
             <Route path="tips" element={<Tips />} />
