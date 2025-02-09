@@ -10,7 +10,7 @@ import { notificationState, planState, userState } from '../../recoil/atoms';
 //import { tips } from '../../data';
 import { trackPayment } from '../../utils/trackPayment';
 import Loader from '../../components/Loader/Loader';
-import { getTips, getUser, updateUserPlan } from '../../firebase';
+import { getTips, getUser, updateUserPlan } from '../../firebase'; 
 
 export default function Tips() {
 // 1. State Variables (useState)

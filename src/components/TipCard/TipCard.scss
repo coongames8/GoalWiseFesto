@@ -72,6 +72,10 @@
                         color: var(--red);
                     }
 
+                    &.pending{
+                        color: var(--grey);
+                    }
+
                     .icon{
                         font-size: 14px;
                         margin: 0 5px;
