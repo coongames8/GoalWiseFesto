@@ -36,7 +36,7 @@ export default function Pricing() {
                           }
                         </ul>
                         <img src="https://i.postimg.cc/2jV99bKc/Vector-1.png" alt="bg" className="table-bg"/>
-                        <NavLink className="btn" style={{backgroundColor: pricing.color}} state={{ from: location, subscription: pricing}} to={"/subscribe"}>Start now</NavLink>
+                        <NavLink className="btn" style={{backgroundColor: pricing.color}} state={{ from: location, subscription: pricing}} to={"/subscribe"}>Subscribe now</NavLink>
                     </div>
                 );
             })
