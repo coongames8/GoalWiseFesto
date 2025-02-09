@@ -46,7 +46,7 @@ const Footer = () => {
                 <section>
                     <h2>GoalGenius</h2>
                     <div className='items-container theme'>
-                        <NavLink to='/contact' title='goal genius' state={{ from: location }}>Home</NavLink>
+                        <NavLink to='/' title='goal genius' state={{ from: location }}>Home</NavLink>
                         <NavLink to='/pricing' title='pricing' state={{ from: location }}>Pricing</NavLink>
                         <NavLink to='/tips' title='tips' state={{ from: location }}>Tips</NavLink>
                         <NavLink to='/news' title='news' state={{ from: location }}>Our News</NavLink>

@@ -37,7 +37,7 @@ export const Register = () => {
                 <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/'/>
                 <label htmlFor="username">Username:</label>
                 <input type="text" id='username' placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} pattern ={'/^[a-zA-Z0-9._-]{4,15}$/'}/>
-                <span>Your username should be between 4 and 15 characters long and can include letters, numbers, underscores (_), periods (.), and hyphens (-).</span>
+                <span>username should be between 4 and 15 characters long and can include letters, numbers, underscores (_), periods (.), and hyphens (-).</span>
                 <label htmlFor="password">Password:</label>
                 <input type="password" id='password' placeholder="******" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <button type='submit' className='btn'>SIGN UP</button>

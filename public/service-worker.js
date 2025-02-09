@@ -1,9 +1,9 @@
-/*const CACHE_NAME = 'goal-genius-cache';
+const CACHE_NAME = 'goal-genius-cache';
 const urlsToCache = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/logo512.png'
+    '*'
 ];
 
 
@@ -98,5 +98,3 @@ self.addEventListener('push', (event) => {
         self.registration.showNotification('GOAL GENIUS', options)
     );
 });
-
-*/

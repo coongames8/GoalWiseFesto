@@ -5,165 +5,82 @@ import Image3 from './assets/4.jpg';
 import { FaTelegram} from "react-icons/fa";
 import {PiXLogo} from "react-icons/pi";
 
-/*export const tips = [
-  {
-    id: 1,
-    date: "11/6/2024",
-    time: "23:05",
-    premium: true,
-    home: "Real Madrid",
-    away: "Manchester United",
-    results: "2-2",
-    odd: "10.0",
-    won: true,
-    type: "1X2"
-  },
-  {
-    id: 1,
-    date: "11/6/2024",
-    time: "23:05",
-    premium: false,
-    home: "Real Madrid",
-    away: "Manchester United Manchester",
-    results: "2-2",
-    odd: "10.0",
-    won: true,
-    type: "DC"
-  },
-  {
-    id: 1,
-    date: "11/6/2024",
-    time: "23:05",
-    premium: true,
-    home: "Real Madrid",
-    away: "Manchester United",
-    results: "2-2",
-    odd: "10.0",
-    won: false,
-    type: "1X2"
-  },
-  
-  {
-    id: 1,
-    date: "11/6/2024",
-    time: "23:05",
-    premium: true,
-    home: "Real Madrid",
-    away: "Manchester United",
-    results: "2-2",
-    odd: "10.0",
-    won: true,
-    type: "1X2"
-  },
-  {
-    id: 1,
-    date: "11/6/2024",
-    time: "04:05",
-    premium: false,
-    home: "Real Madrid",
-    away: "Manchester United Manchester",
-    results: "2-2",
-    odd: "10.0",
-    won: true,
-    type: "1X2"
-  },
-  {
-    id: 1,
-    date: "11/6/2024",
-    time: "23:05",
-    premium: true,
-    home: "Real Madrid",
-    away: "Manchester United",
-    results: "2-2",
-    odd: "10.0",
-    won: false,
-    type: "1X2"
-  },
-]*/
-
-
 export const pricings = [
   {
     id: "1",
     plan: "Basic",
     billing: "Day",
     title: "Daily insights for casual fans",
-    price: 5,
+    price: 7,
     features: [
       "Daily match predictions",
       "Limited league coverage",
-      "Basic player stats",
-      "Weekly newsletter",
+      "5-10 odds",
     ],
     color: "#2196f3",
   },
   {
     id: "2",
-    plan: "Advanced",
+    plan: "Standard",
     billing: "Day",
     title: "Comprehensive daily insights",
     price: 10,
     features: [
       "All Basic features +",
       "Expanded league coverage",
-      "Detailed match predictions",
-      "Daily updates",
+      "10-20 odds",
     ],
     color: "#3498db",
   },
   {
     id: "3",
-    plan: "Elite",
+    plan: "Pro", //Pro, Ultimate, Elite, Platinum
     billing: "Day",
     title: "Full access to daily predictions",
     price: 20,
     features: [
       "All Advanced features +",
-      "In-depth player and team analytics",
-      "Live match updates",
-      "Priority customer support",
+      "Fixed Correct Score",
+      "20+ odd",
     ],
     color: "#1f4568",
   },
   {
     id: "4",
-    plan: "Standard Weekly",
+    plan: "Basic",
     billing: "Week",
     title: "Weekly predictions for dedicated fans",
     price: 25,
     features: [
-      "Weekly match predictions",
-      "Select league coverage",
-      "Player performance reviews",
-      "Weekly insights and updates",
+      "5 days Tips",
+      "5+ odds per day",
+      "Priority Customer Support",
     ],
     color: "#2196f3",
   },
   {
     id: "5",
-    plan: "Pro Weekly",
+    plan: "Standard",
     billing: "Week",
     title: "Enhanced weekly insights and stats",
     price: 40,
     features: [
       "All Standard Weekly features +",
-      "Comprehensive league coverage",
-      "Expert analysis and forecasts",
-      "Exclusive weekly content",
+      "20+ odds per day",
+      "6 Days Tips",
     ],
     color: "#3498db",
   },
   {
     id: "6",
-    plan: "Ultimate Weekly",
+    plan: "Pro",
     billing: "Week",
     title: "Exclusive weekly access to expert insights",
     price: 60,
     features: [
       "All Pro Weekly features +",
-      "Priority access to new features",
-      "Customized prediction reports",
-      "VIP customer support",
+      "7 Days Tips",
+      "VIP Correct Score",
     ],
     color: "#1f4568",
   }
