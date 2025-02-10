@@ -33,7 +33,7 @@ export default function Home() {
       <AppHelmet title={""}/>
       <AlertAction />
       <Slider />
-      <Featured /> 
+      <Featured />
       <Pricing />
       {news.length > 0 && <>
       <h1>News Feed</h1>

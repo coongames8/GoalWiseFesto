@@ -4,6 +4,7 @@ import { socialUrls } from '../../data';
 import { userState } from '../../recoil/atoms';
 import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
+import HomeBg from '../HomeBg/HomeBg';
 const Footer = () => {
     const user = useRecoilValue(userState);
     const [isAdmin, setIsAdmin] = useState(null);
@@ -21,6 +22,7 @@ const Footer = () => {
     }, [user]);
     return (
         <div className='footer theme'>
+            <HomeBg  opacity={0.2}/>
             <div className='social'>
                 <h2>Follow us</h2>
                 <div className="wrapper">
