@@ -2,15 +2,14 @@ import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import TipCard from '../../components/TipCard/TipCard';
 import './Tips.scss';
 import { useEffect, useRef, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { notificationState, planState, userState } from '../../recoil/atoms';
+import { useRecoilState } from 'recoil';
+import {userState } from '../../recoil/atoms';
 //import { tips } from '../../data';
-import { trackPayment } from '../../utils/trackPayment';
 import Loader from '../../components/Loader/Loader';
-import { getTips, getUser, updateUserPlan } from '../../firebase'; 
+import { getTips } from '../../firebase'; 
 
 export default function Tips() {
 // 1. State Variables (useState)
@@ -19,9 +18,7 @@ const [startX, setStartX] = useState(0);
 const [scrollLeft, setScrollLeft] = useState(0);
 const [firstIcon, setFirstIcon] = useState("flex");
 const [lastIcon, setLastIcon] = useState("flex");
-const [orderTrackingId, setOrderTrackingId] = useState(null);
-const [orderMerchantReference, setOrderMerchantReference] = useState(null);
-const [statusData, setStatusData] = useState(null);
+
 const [loading, setLoading] = useState(false);
 const [days, setDays] = useState(null);
 const [currentDate, setCurrentDate] = useState(null);
@@ -29,16 +26,10 @@ const [user, setUser] = useRecoilState(userState);
 const [isAdmin, setAdmin] = useState(false);
 const [filteredTips, setFilteredTips] = useState(null);
 const [gamesType, setGamesType] = useState("1X2");
-const navigate = useNavigate();
 const [tips, setTips] = useState(null);
-const [plan, setPlan] = useRecoilState(planState);
 
 // 2. Other Constants
 const tabBoxRef = useRef();
-const options = { year: 'numeric', month: 'long' };
-const date = new Date(); // current date
-const formattedDate = date.toLocaleDateString('en-US', options);
-const setNotification = useSetRecoilState(notificationState);
 
 // 3. Functions
 const handleIcons = () => {
@@ -54,10 +45,6 @@ const handleClick = (direction) => {
   tabBoxRef.current.scrollLeft += scrollAmount;
 };
 
-const getQueryParam = (param) => {
-  const searchParams = new URLSearchParams(location.search);
-  return searchParams.get(param);
-};
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -116,44 +103,6 @@ useEffect(() => {
   };
 }, [isDragging, startX, scrollLeft]);
 
-
-// Fetch orderTrackingId and orderMerchantReference from query params
-useEffect(() => {
-  const trackingId = getQueryParam('OrderTrackingId');
-  const merchantReference = getQueryParam('OrderMerchantReference');
-  
-  if (trackingId) {
-    setOrderTrackingId(trackingId);
-  }
-  
-  if (merchantReference) {
-    setOrderMerchantReference(merchantReference);
-  }
-}, [location.search]);
-
-const callbackFunction = async(status) => {
-
-  if(status !== "Completed") return;
-  await updateUserPlan(user.email, {
-    type: plan.type,
-    timeSlot: plan.timeSlot
-  }, setNotification).then(() => {
-    getUser(user.email, setUser);
-  }).then(() => {
-    navigate("/tips", { replace: true });
-  })
-}
-
-// Fetch status data when orderTrackingId is available
-useEffect(() => {
-  if (orderTrackingId) {
-    trackPayment(orderTrackingId, setNotification, setStatusData, setLoading);
-  }
-}, [orderTrackingId]);
-
-useEffect(() => {
-  statusData && callbackFunction(statusData.payment_status_description)
-}, [statusData]);
 
 // Fetch last 30 days of dates
 useEffect(() => {

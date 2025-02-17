@@ -3,23 +3,12 @@ import Product from '../../components/Product/Product';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
 import { useEffect, useState } from 'react';
-import { notificationState, subscriptionState, userState } from '../../recoil/atoms';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { useNavigate } from 'react-router-dom';
-import { getTips, getUser } from '../../firebase';
+import { getTips } from '../../firebase';
 
 export default function Plans() {
     const [filteredTips, setFilteredTips] = useState(null);
-    const [user, setUser] = useRecoilState(userState);
-    const [isPremium, setIsPremium] = useState(false);
-    const [orderTrackingId, setOrderTrackingId] = useState(null);
-    const [orderMerchantReference, setOrderMerchantReference] = useState(null);
-    const [statusData, setStatusData] = useState(null);
-    const navigate = useNavigate();
-    const setNotification = useSetRecoilState(notificationState);
     const [tips, setTips] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [subscription, setSubscription] = useRecoilState(subscriptionState);
 
     const formatDate = (dateString) => {
       const date = new Date(dateString);
@@ -31,52 +20,6 @@ export default function Plans() {
     useEffect(() =>{
       getTips(setTips, setLoading, formatDate(today));
     }, []);
-
-    const getQueryParam = (param) => {
-      const searchParams = new URLSearchParams(location.search);
-      return searchParams.get(param);
-    };
-
-    // Fetch orderTrackingId and orderMerchantReference from query params
-useEffect(() => {
-  const trackingId = getQueryParam('OrderTrackingId');
-  const merchantReference = getQueryParam('OrderMerchantReference');
-  
-  if (trackingId) {
-    setOrderTrackingId(trackingId);
-  }
-  
-  if (merchantReference) {
-    setOrderMerchantReference(merchantReference);
-  }
-}, [location.search]);
-
-
-const callbackFunction = async(status) => {
-
-  if(status !== "Completed") return;
-  const currentDate = new Date().toISOString();
-  await updateUser(user.email, true, {
-    subDate: currentDate,
-    billing: subscription.billing,
-    plan: subscription.plan,
-  }, setNotification).then(() => {
-    getUser(user.email, setUser);
-  }).then(() => {
-    navigate("/tips", { replace: true });
-  });
-}
-
-// Fetch status data when orderTrackingId is available
-useEffect(() => {
-  if (orderTrackingId) {
-    trackPayment(orderTrackingId, setNotification, setStatusData, setLoading);
-  }
-}, [orderTrackingId]);
-
-useEffect(() => {
-  statusData && callbackFunction(statusData.payment_status_description)
-}, [statusData]);
 
 
     useEffect(() => {

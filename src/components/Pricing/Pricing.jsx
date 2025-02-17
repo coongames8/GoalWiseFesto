@@ -1,15 +1,13 @@
 import './Pricing.scss';
 import { NavLink, useLocation } from 'react-router-dom';
 import { pricings } from '../../data';
-import { useEffect, useRef, useState } from 'react';
-import HomeBg from '../HomeBg/HomeBg';
+import {useState } from 'react';
 
 export default function Pricing() {
   const [billing, setBilling] = useState("Day");
   const location = useLocation();
   return (
     <div className='pricing' id='pricing'>
-        <HomeBg  opacity={1}/>
         <h1 className='head'>Pricing</h1>
         <div className="pricing-header">
             <h2>What fits you the best?</h2>

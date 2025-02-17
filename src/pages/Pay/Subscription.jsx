@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
 import Loader from '../../components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 import { pricings } from '../../data';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import { notificationState, subscriptionState, userState } from '../../recoil/atoms';
-import { handlePayment } from '../../utils/handlePayments';
+import { PaystackButton } from 'react-paystack';
+import { getUser, updateUser } from '../../firebase';
 
 
 export default function Subscription() {
@@ -16,9 +18,9 @@ export default function Subscription() {
   const [paymentType, setPaymentType] =useState("mpesa");
   const location = useLocation();
   const [data, setData] = useState(null);
-  const [url, setUrl] = useState(null);
   const setNotification = useSetRecoilState(notificationState);
   const [subscription, setSubscription] = useRecoilState(subscriptionState);
+  const navigate = useNavigate();
 
   useEffect(() => {
       if(location.state) {
@@ -30,22 +32,42 @@ export default function Subscription() {
       }
   }, [location]);
 
-  const handlePay = () => {
-    data && handlePayment( data.price || subscription.price,user ? user.email : "coongames8@gmail.com", `${data.plan} Plan For A ${data.billing}`, '/plans', setLoading, setNotification, setUrl)
-  }
+    const handleUpgrade = async () => {
+        const currentDate = new Date().toISOString();
+        await updateUser(user.email, true, {
+          subDate: currentDate,
+          billing: subscription.billing,
+          plan: subscription.plan,
+        }, setNotification).then(() => {
+          getUser(user.email, setUser);
+        }).then(() => {
+          navigate("/plans", { replace: true });
+        });
+    };
+
+    const componentProps = {
+      reference: (new Date()).getTime().toString(),
+      email: user ? user.email : "coongames8@gmail.com",
+      amount: (paymentType === "mpesa") ? ((data && data.price * 100 * 129) || (subscription.price * 100 * 129)) : ((data && data.price * 100) || (subscription.price * 100)),
+      publicKey: 'pk_live_3536854dd4b68716f9d7515d748772e701c04832',
+      currency: (paymentType === "mpesa") ? "KES" : "USD",
+      metadata: {
+        name: user ? user.email : "coongames8@gmail.com",
+      },
+      text: 'PAY NOW',
+      onSuccess: (response) => {
+        handleUpgrade();
+      },
+      onClose: () => {
+        //console.log('Payment dialog closed');
+        // Handle payment closure here
+      },
+    };
 
   return (
     <div className='pay'>
       <AppHelmet title={"Booking"}/>
       <ScrollToTop />
-
-      {url && <iframe src={url} style={{
-        width: "100vw",
-        minHeight: "100vh",
-        position: 'absolute',
-        zIndex: "6"
-      }}></iframe>}
-
       {
         loading && <Loader />
       }
@@ -62,7 +84,7 @@ export default function Subscription() {
             <label htmlFor="card">💳 Credit Card</label>
         </fieldset>
       </form>
-      <button className='btn'  onClick={handlePay}>PAY NOW</button>
+      <PaystackButton {...componentProps} className='btn'/>
     </div>
   )
 }

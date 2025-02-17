@@ -1,23 +1,25 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Pay.scss';
 import { useEffect, useState } from 'react';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
 import Loader from '../../components/Loader/Loader';
 import { pricings } from '../../data';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
-import { notificationState, planState } from '../../recoil/atoms';
-import { handlePayment } from '../../utils/handlePayments';
-
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import { notificationState, planState, userState } from '../../recoil/atoms';
+import { getUser, updateUserPlan } from '../../firebase';
+import { PaystackButton } from 'react-paystack';
 
 export default function Pay() {
+  const [user, setUser] = useRecoilState(userState);
   const [loading, setLoading] = useState(false);
   const [paymentType, setPaymentType] =useState("mpesa");
   const location = useLocation();
   const [data, setData] = useState(null);
-  const [url, setUrl] = useState(null);
   const setNotification = useSetRecoilState(notificationState);
   const plan = useRecoilValue(planState)
+  const navigate = useNavigate();
+
   useEffect(() => {
       if(location.state) {
         setData(location.state)
@@ -27,30 +29,43 @@ export default function Pay() {
   }, [location]);
 
 
+  const handleUpgrade = async () => {
+    await updateUserPlan(user.email, {
+      type: plan.type,
+      timeSlot: plan.timeSlot
+    }, setNotification).then(() => {
+      getUser(user.email, setUser);
+    }).then(() => {
+      navigate("/tips", { replace: true });
+    })
+  };
 
 
-  const handlePay = () => {
-    data && handlePayment( data.price || plan.price,user ? user.email : "coongames8@gmail.com", `${data.plan} Plan For A ${data.billing}`, '/tips', setLoading, setNotification, setUrl)
-    //data && handlePayment( 2,user ? user.email : "coongames8@gmail.com", `${data.plan} Plan For A ${data.billing}`, '/tips', setLoading, setNotification, setUrl)
-  }
-
+  const componentProps = {
+    reference: (new Date()).getTime().toString(),
+    email: user ? user.email : "coongames8@gmail.com",
+    amount: (paymentType === "mpesa") ? ((data && data.price * 100 * 129) || (plan.price * 100 * 129)) : ((data && data.price * 100) || (plan.price * 100)),
+    publicKey: 'pk_live_3536854dd4b68716f9d7515d748772e701c04832',
+    currency: (paymentType === "mpesa") ? "KES" : "USD",
+    metadata: {
+      name: user ? user.email : "coongames8@gmail.com",
+    },
+    text: 'PAY NOW',
+    onSuccess: (response) => {
+      handleUpgrade();
+    },
+    onClose: () => {
+      //console.log('Payment dialog closed');
+      // Handle payment closure here
+    },
+  };
   return (
     <div className='pay'>
       <AppHelmet title={"Booking"}/>
       <ScrollToTop />
-
-      {url && <iframe src={url} style={{
-        width: "100vw",
-        minHeight: "100vh",
-        position: 'absolute',
-        zIndex: "6"
-      }}></iframe>}
-
       {
         loading && <Loader />
       }
-
-
       {data && <h4>You Are About To Claim {data.type} Tips At {data.timeSlot} With {data.totalOdds} Odds For Only ${data.price}</h4>}
       <form className="method">
         <fieldset>
@@ -62,7 +77,7 @@ export default function Pay() {
             <label htmlFor="card">💳 Credit Card</label>
         </fieldset>
       </form>
-      <button className='btn'  onClick={handlePay}>PAY NOW</button>
+      <PaystackButton {...componentProps} className='btn'/>
     </div>
   )
 }
