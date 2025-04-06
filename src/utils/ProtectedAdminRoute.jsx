@@ -12,13 +12,13 @@ const ProtectedAdminRoute = ({ children }) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!user || !['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'aronkorir8@gmail.com'].includes(user.email)) {
+    if (!user || !['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'gguruu3@gmail.com'].includes(user.email)) {
       const previousPath = location.state?.from || '/';
       navigate(previousPath, { replace: true });
     }
   }, [user, navigate, location]);
 
-  if (!user || !['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'aronkorir8@gmail.com'].includes(user.email)) {
+  if (!user || !['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'gguruu3@gmail.com'].includes(user.email)) {
     return null; // Optionally render a loading indicator or message
   }
 
