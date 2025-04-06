@@ -171,7 +171,7 @@ useEffect(() => {
 
 // Update premium status based on user state
 useEffect(() => {
-  if (user && ['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'aronkorir8@gmail.com'].includes(user.email)) {
+  if (user && ['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'gguruu3@gmail.com'].includes(user.email)) {
     setAdmin(true);
   } else {
     setAdmin(false);
