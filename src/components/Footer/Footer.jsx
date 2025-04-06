@@ -13,7 +13,7 @@ const Footer = () => {
 
     useEffect(() => {
         if(user) {
-            if(user.email === 'kkibetkkoir@gmail.com' || user.email === 'charleykibet254@gmail.com' || user.email === 'aronkorir8@gmail.com'){
+            if(user.email === 'kkibetkkoir@gmail.com' || user.email === 'charleykibet254@gmail.com' || user.email === 'gguruu3@gmail.com'){
                 setIsAdmin(true)
             } else {
                 setIsAdmin(null);
