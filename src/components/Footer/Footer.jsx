@@ -12,8 +12,8 @@ const Footer = () => {
 
 
     useEffect(() => {
-        if(user) {
-            if(user.email === 'kkibetkkoir@gmail.com' || user.email === 'charleykibet254@gmail.com' || user.email === 'gguruu3@gmail.com'){
+        if (user) {
+            if (user.email === 'kkibetkkoir@gmail.com' || user.email === 'charleykibet254@gmail.com' || user.email === 'coongames8@gmail.com') {
                 setIsAdmin(true)
             } else {
                 setIsAdmin(null);
@@ -28,17 +28,17 @@ const Footer = () => {
                     {
                         socialUrls.map(social => {
                             return (
-                                <Link 
-                                    to={social.url} 
-                                    title={social.title} 
-                                    target='_blank' 
+                                <Link
+                                    to={social.url}
+                                    title={social.title}
+                                    target='_blank'
                                     key={social.id}
                                 >
                                     {social.icon}
                                 </Link>
                             );
                         })
-                        
+
                     }
                 </div>
             </div>
@@ -53,7 +53,7 @@ const Footer = () => {
                         <NavLink to='/news' title='news' state={{ from: location }}>Our News</NavLink>
                     </div>
                 </section>
-                
+
                 <section>
                     <h2>Useful Links</h2>
                     <div className='items-container theme'>
@@ -65,15 +65,15 @@ const Footer = () => {
                 </section>
                 {
 
-                isAdmin && 
-                (<section>
-                    <h2>Admin</h2>
-                    <div className='items-container theme'>
-                        <NavLink to='/add-tip' title='help' state={{ from: location }}>Add Tip</NavLink>
-                        <NavLink to='/add-post' title='services' state={{ from: location }}>Add Post</NavLink>
-                        <NavLink to='/users' title='store' state={{ from: location }}>All Users</NavLink>
-                    </div>
-                </section>)}
+                    isAdmin &&
+                    (<section>
+                        <h2>Admin</h2>
+                        <div className='items-container theme'>
+                            <NavLink to='/add-tip' title='help' state={{ from: location }}>Add Tip</NavLink>
+                            <NavLink to='/add-post' title='services' state={{ from: location }}>Add Post</NavLink>
+                            <NavLink to='/users' title='store' state={{ from: location }}>All Users</NavLink>
+                        </div>
+                    </section>)}
             </div>
             <hr />
             <div className='footer-bottom theme'>

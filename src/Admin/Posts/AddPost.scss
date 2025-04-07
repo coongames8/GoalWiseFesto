@@ -68,9 +68,9 @@
             border-radius: 4px;
             text-align: center;
             padding: 3px 5px;
-        }  
-        
-        
+        }
+
+
         > input, textarea{
           height: fit-content;
           position: relative;
@@ -81,12 +81,12 @@
           box-shadow: var(--shadow);
           width: 100%;
           min-height: 50px;
-          
-          
+
+
           &:first-of-type{
             min-height: 50px;
           }
-          
+
           appearance: none;
           -moz-appearance: none;
           -webkit-appearance: none;
@@ -99,13 +99,13 @@
           -o-transition: all 0.4s;
           overflow-x: auto;
         }
-        
+
         textarea{
             max-width: 100%;
             min-width: 100%;
             min-height: 150px;
-            
-            
+
+
             &:first-of-type{
               min-height: 50px;
             }
@@ -117,8 +117,5 @@
             justify-content: space-evenly;
             gap: 10px;
         }
-        .error{
-            color: var(--red);
-          }
     }
 }
