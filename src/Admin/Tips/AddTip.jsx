@@ -26,12 +26,42 @@ export default function AddTip() {
     };
 
 
-    const handleSubmit = (e) => {
+    /*const handleSubmit = (e) => {
         e.preventDefault()
         const d = new Date(time)
         let date = d.toLocaleString().split(',')[0]
         addTip({home, away, date, odd, pick, status, time:time.split("T")[1], won, results, type: gamesType}, setNotification, setLoading);
-    }
+    }*/
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const d = new Date(time);
+
+    // Format the date as "M/D/YYYY"
+    const date = new Intl.DateTimeFormat('en-US').format(d);
+
+    // Format the time as "HH:MM"
+    const timeOnly = d.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
+
+    addTip({
+        home,
+        away,
+        date,
+        odd,
+        pick,
+        status,
+        time: timeOnly,
+        won,
+        results,
+        type: gamesType
+    }, setNotification, setLoading);
+};
+
 
   return (
     <div className='admin-tips'>
