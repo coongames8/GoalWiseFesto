@@ -15,6 +15,7 @@ export default function AddTip() {
     const [status, setStatus] = useState('');
     const [time, setTime] = useState('');
     const [won, setWon] = useState('');
+    const [premium, setPremium] = useState(false);
     const [results, setResults] = useState('');
     const [loading, setLoading] = useState(false);
     const setNotification = useSetRecoilState(notificationState);
@@ -30,7 +31,7 @@ export default function AddTip() {
         e.preventDefault()
         const d = new Date(time)
         let date = d.toLocaleString().split(',')[0]
-        addTip({home, away, date, odd, pick, status, time:time.split("T")[1], won, results, type: gamesType}, setNotification, setLoading);
+        addTip({home, away, date, odd, pick, status, time:time.split("T")[1], won, premium, results, type: gamesType}, setNotification, setLoading);
     }*/
 
     const handleSubmit = (e) => {
@@ -101,8 +102,10 @@ export default function AddTip() {
                 <label htmlFor="won">Is won</label>
                 <input type="text" placeholder='won/pending/lost' id='won' value={won} onChange={(e) => setWon(e.target.value)} required/>
             </div>
-
-
+            <div className="input-container">
+                <label htmlFor="premium">Is premium</label>
+                <input type="checkbox" placeholder='premium' id='premium' onChange={(e) => setPremium(e.target.checked)} checked={premium}/>
+            </div>
             <div className="input-container">
                 <label>Select Type:</label>
                 <label><input type="radio" name="games-type" value={"1X2"} id="1X2" checked={gamesType === "1X2"} onChange={handleChange}/>WDW (1X2)</label>
