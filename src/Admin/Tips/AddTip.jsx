@@ -58,6 +58,7 @@ export default function AddTip() {
         status,
         time: timeOnly,
         won,
+        premium,
         results,
         type: gamesType
     }, setNotification, setLoading);
