@@ -16,6 +16,7 @@ export default function EditTip() {
     const [status, setStatus] = useState('');
     //const [time, setTime] = useState('');
     const [won, setWon] = useState('');
+    const [premium, setPremium] = useState(false);
     const [gamesType, setGamesType] = useState("1X2");
     const [results, setResults] = useState('');
     const [loading, setLoading] = useState(false);
@@ -38,7 +39,7 @@ export default function EditTip() {
         e.preventDefault()
         //const d = new Date(time)
         //let date = d.toLocaleString().split(',')[0]
-        updateTip(data.id, {home, away, odd, pick, status, won, type: gamesType, results}, setNotification, setLoading, setData);
+        updateTip(data.id, {home, away, odd, pick, status, won, premium, type: gamesType, results}, setNotification, setLoading, setData);
     }
 
     useEffect(() => {
@@ -53,6 +54,7 @@ export default function EditTip() {
             //const datetimeLocal = formatDateTimeForInput(data.date, data.time);
             //setTime(datetimeLocal);
             setWon(data.won);
+            setPremium(dara.premium);
             setGamesType(data.type);
         } //else window.history.back()
     }, [data]);
@@ -90,6 +92,10 @@ export default function EditTip() {
             <div className="input-container">
                 <label htmlFor="won">Is won</label>
                 <input type="text" placeholder='won/pending/lost' id='won' value={won} onChange={(e) => setWon(e.target.value)} required/>
+            </div>
+            <div className="input-container">
+                <label htmlFor="premium">Is premium</label>
+                <input type="checkbox" placeholder='premium' id='premium' onChange={(e) => setPremium(e.target.checked)} checked={premium}/>
             </div>
             <div className="input-container">
                 <label>Select Type:</label>
