@@ -1,7 +1,6 @@
 // App.js
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ParticlesBg from 'particles-bg';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { notificationState, userState } from './recoil/atoms';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -78,13 +77,12 @@ function App() {
     <div className="App">
       {loading ? <Loader /> : (
         <>
-          <ParticlesBg type="cobweb" bg={true} color='#ebf4fc' />
           <Topbar />
           <Navbar />
           <Notification />
           <Routes>
             <Route path="/" element={<Home />} />
-            
+
             <Route path="pricing" element={<Pricing />} />
             <Route path="subscribe" element={<ProtectedRoute><Subscription /></ProtectedRoute>} />
             <Route path="plans" element={<ProtectedPricingRoute><Plans /></ProtectedPricingRoute>} />

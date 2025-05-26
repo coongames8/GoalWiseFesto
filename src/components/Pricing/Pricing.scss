@@ -4,70 +4,6 @@
     padding: 10px 0;
     position: relative;
 
-    > .head{
-        color: var(--lite);
-    }
-        
-    .pricing-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        h2{
-            color: var(--lite);
-        }
-
-        .plans-switch-container {
-            position: relative;
-            color: #fff;
-            display: inline-block;
-    
-            .daily{
-                position: absolute;
-                left: 45px;
-                top: 15px;
-                pointer-events: none;
-            }
-
-
-            .weekly{
-                position: absolute;
-                right: 36px;
-                top: 15px;
-                pointer-events: none;
-            }
-
-            .plans-switch {
-                width: 250px;
-                background: var(--dark-blue);
-                height:55px;
-                appearance: none;
-                border-radius: 30px;
-                outline: none;
-                cursor: pointer;
-                position: relative;
-        
-                &::before {
-                    content: "";
-                    position: absolute;
-                    height: 44px;
-                    width: 120px;
-                    border-radius: 30px;
-                    background: var(--green);
-                    top: 50%;
-                    transform: translateY(-50%);
-                    left: 6px;
-                    transition: all .5s;
-                }
-        
-                &:checked::before {
-                    left: 136px;
-                    width: 106px;
-                }
-            }
-        }
-    }
-
     .wrapper{
         width: 100%;
         display: flex;
@@ -80,15 +16,15 @@
             width: calc((100% - 100px)/ 3);
             min-width: 300px;
             height: inherit;
-            box-shadow: var(--shadow); 
+            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column; 
+            flex-direction: column;
             padding: 10px 20px;
             position: relative;
             background: linear-gradient(to bottom, var(--lite), var(--light-blue));
-            
+
             //background: var(--light-color);
             position: relative;
             border-radius: 10px;

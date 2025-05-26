@@ -5,7 +5,7 @@ import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
 import Loader from '../../components/Loader/Loader';
 import { pricings } from '../../data';
-import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { notificationState, planState, userState } from '../../recoil/atoms';
 import { getUser, updateUserPlan } from '../../firebase';
 import { PaystackButton } from 'react-paystack';
@@ -13,7 +13,6 @@ import { PaystackButton } from 'react-paystack';
 export default function Pay() {
   const [user, setUser] = useRecoilState(userState);
   const [loading, setLoading] = useState(false);
-  const [paymentType, setPaymentType] =useState("mpesa");
   const location = useLocation();
   const [data, setData] = useState(null);
   const setNotification = useSetRecoilState(notificationState);
@@ -21,11 +20,11 @@ export default function Pay() {
   const navigate = useNavigate();
 
   useEffect(() => {
-      if(location.state) {
-        setData(location.state)
-      } else {
-        setData(pricings[0])
-      }
+    if (location.state) {
+      setData(location.state)
+    } else {
+      setData(pricings[0])
+    }
   }, [location]);
 
 
@@ -44,9 +43,9 @@ export default function Pay() {
   const componentProps = {
     reference: (new Date()).getTime().toString(),
     email: user ? user.email : "coongames8@gmail.com",
-    amount: (paymentType === "mpesa") ? ((data && data.price * 100 * 129) || (plan.price * 100 * 129)) : ((data && data.price * 100) || (plan.price * 100)),
-    publicKey: 'pk_live_362b1c5a898c1cbcc3997049f738136211f625bf',
-    currency: (paymentType === "mpesa") ? "KES" : "USD",
+    amount: data.price * 100 || (plan.price * 100),
+    publicKey: 'pk_live_71bf88a41666c28d7e035b7086eddedda3ba8c47',
+    currency: "KES",
     metadata: {
       name: user ? user.email : "coongames8@gmail.com",
     },
@@ -61,23 +60,13 @@ export default function Pay() {
   };
   return (
     <div className='pay'>
-      <AppHelmet title={"Booking"}/>
+      <AppHelmet title={"Booking"} />
       <ScrollToTop />
       {
         loading && <Loader />
       }
-      {data && <h4>You Are About To Claim {data.type} Tips At {data.timeSlot} With {data.totalOdds} Odds For Only ${data.price}</h4>}
-      <form className="method">
-        <fieldset>
-            <input name="payment-method" type="radio" value={"mpesa"} id="mpesa" checked={paymentType === "mpesa"}   onChange={(e) => setPaymentType(e.target.value)}/>
-            <label htmlFor="mpesa">📲 Mobile Payment</label>
-        </fieldset>
-        <fieldset>
-            <input name="payment-method" type="radio" value={"card"} id="card" checked={paymentType === "card"}   onChange={(e) => setPaymentType(e.target.value)}/>
-            <label htmlFor="card">💳 Credit Card</label>
-        </fieldset>
-      </form>
-      <PaystackButton {...componentProps} className='btn'/>
+      {data && <h4>You Are About To Claim {data.type} Tips At {data.timeSlot} With {data.totalOdds} Odds For Only KSH {data.price}</h4>}
+      <PaystackButton {...componentProps} className='btn' />
     </div>
   )
 }

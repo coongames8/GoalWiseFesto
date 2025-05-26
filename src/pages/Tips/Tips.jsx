@@ -79,7 +79,7 @@ export default function Tips() {
       if (!isDragging) return;
       e.preventDefault();
       const x = e.pageX - tabBox.offsetLeft;
-      const walk = (x - startX) * 2; // Adjust scroll speed
+      const walk = (x - startX) * 5; // Adjust scroll speed
       tabBox.scrollLeft = scrollLeft - walk;
     };
 
@@ -103,10 +103,10 @@ export default function Tips() {
   }, [isDragging, startX, scrollLeft]);
 
 
-  // Fetch last 30 days of dates
+  // Fetch last 7 days of dates
   useEffect(() => {
     let dates = [];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 7; i++) {
       let date = new Date();
       date.setDate(date.getDate() - i);
       dates.push(date.toISOString().split('T')[0]);

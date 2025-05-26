@@ -10,7 +10,7 @@
     gap: 5px;
 
     background: linear-gradient(to bottom, var(--light-blue), var(--lite));
-  
+
     h1{
       &:first-of-type{
         font-size: 18px;
@@ -27,6 +27,6 @@
     .btn:hover {
       background: var(--lite);
       color: var(--grey);
-  
+
     }
 }

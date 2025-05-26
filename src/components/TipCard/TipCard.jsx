@@ -36,7 +36,7 @@ export default function TipCard({ tip, isAdmin, timeSlot, plan, today }) {
     }, [plan, timeSlot, tip.type, isAdmin]);
 
     return (
-        <div className="tip-card" style={{ borderLeft: hidden ? "2px solid #1f4568" : "2px solid #2196f3" }}>
+        <div className="tip-card" style={{ borderLeft: hidden ? "2px solid #0A6847" : "2px solid #059212" }}>
             <div className="center">
                 <div className="teams">
                     <p className="name" style={{

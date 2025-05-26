@@ -2,88 +2,49 @@ import { IoLogoFacebook, IoLogoInstagram, IoLogoWhatsapp } from "react-icons/io5
 import Image1 from './assets/10.jpg';
 import Image2 from './assets/3.jpg';
 import Image3 from './assets/4.jpg';
-import { FaTelegram} from "react-icons/fa";
-import {PiXLogo} from "react-icons/pi";
+import { FaTelegram } from "react-icons/fa";
+import { PiXLogo } from "react-icons/pi";
 
 export const pricings = [
   {
     id: "1",
-    plan: "Basic",
+    plan: "Daily",
     billing: "Day",
-    title: "Daily insights for casual fans",
-    price: 7,
+    title: "Full access to daily predictions",
+    price: 500,
     features: [
       "Daily match predictions",
-      "Limited league coverage",
-      "5-10 odds",
+      "Fixed Correct Score",
+      "20+ odds",
     ],
-    color: "#2196f3",
+    color: "#059212",
   },
   {
     id: "2",
-    plan: "Standard",
-    billing: "Day",
-    title: "Comprehensive daily insights",
-    price: 10,
-    features: [
-      "All Basic features +",
-      "Expanded league coverage",
-      "10-20 odds",
-    ],
-    color: "#3498db",
-  },
-  {
-    id: "3",
-    plan: "Pro", //Pro, Ultimate, Elite, Platinum
-    billing: "Day",
-    title: "Full access to daily predictions",
-    price: 20,
-    features: [
-      "All Advanced features +",
-      "Fixed Correct Score",
-      "20+ odd",
-    ],
-    color: "#1f4568",
-  },
-  {
-    id: "4",
-    plan: "Basic",
+    plan: "Weekly",
     billing: "Week",
-    title: "Weekly predictions for dedicated fans",
-    price: 25,
+    title: "Exclusive weekly access to expert tips",
+    price: 1950,
     features: [
-      "5 days Tips",
-      "5+ odds per day",
-      "Priority Customer Support",
-    ],
-    color: "#2196f3",
-  },
-  {
-    id: "5",
-    plan: "Standard",
-    billing: "Week",
-    title: "Enhanced weekly insights and stats",
-    price: 40,
-    features: [
-      "All Standard Weekly features +",
-      "20+ odds per day",
-      "6 Days Tips",
-    ],
-    color: "#3498db",
-  },
-  {
-    id: "6",
-    plan: "Pro",
-    billing: "Week",
-    title: "Exclusive weekly access to expert insights",
-    price: 60,
-    features: [
-      "All Pro Weekly features +",
+      "20+ odds daily",
       "7 Days Tips",
       "VIP Correct Score",
     ],
-    color: "#1f4568",
-  }
+    color: "#00A36C",
+  },
+  {
+    id: "3",
+    plan: "Monthly",
+    billing: "Month",
+    title: "Comprehensive predictions for dedicated fans",
+    price: 4200,
+    features: [
+      "20+ odds per day",
+      "Priority Customer Support",
+      "VIP Tips For 30 Days Tips",
+    ],
+    color: "#0A6847",
+  },
 ];
 
 export const faqs = [
