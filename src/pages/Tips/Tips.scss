@@ -1,8 +1,9 @@
 .tips{
     width: 100%;
+    min-height: calc(100vh - 95px);
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: start;
     flex-direction: column;
     background: linear-gradient(to bottom, var(--lite), var(--transparent), var(--light-blue));
 
@@ -13,7 +14,7 @@
         //border-radius: 13px;
         overflow-x: hidden;
         position: relative;
-        padding: 5px;
+        padding: 5px 10px;
         .tabs-box{
             display: flex;
             align-items: center;
@@ -59,7 +60,7 @@
             position: absolute;
             top: 0;
             height: 100%;
-            width: 40px;
+            width: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,7 +72,7 @@
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                padding: 6px;
+                padding: 5px;
                 cursor: pointer;
 
                 &:hover{
@@ -154,7 +155,7 @@
                 }
               }
 
-            
+
               input[type="radio"]{
                 visibility: hidden;
                 position: absolute;
@@ -171,7 +172,7 @@
                   position: relative;
                   z-index: 5;
                 }
-              } 
+              }
         }
 
         @media(max-width: 400px){
@@ -193,7 +194,7 @@
         color: var(--dark);
         font-size: 18px;
     }
-    
+
     .container{
         width: 100%;
         height: 100%;

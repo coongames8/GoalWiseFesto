@@ -2,8 +2,7 @@ const CACHE_NAME = 'goal-genius-cache';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/manifest.json',
-    '*'
+    '/manifest.json'
 ];
 
 

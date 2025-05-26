@@ -7,7 +7,6 @@ import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
-//import { tips } from '../../data';
 import Loader from '../../components/Loader/Loader';
 import { getTips } from '../../firebase';
 
@@ -35,7 +34,7 @@ export default function Tips() {
   const handleIcons = () => {
     let scrollVal = Math.round(tabBoxRef.current.scrollLeft);
     let maxScrollableWidth = tabBoxRef.current.scrollWidth - tabBoxRef.current.clientWidth;
-    setFirstIcon(scrollVal >= 0 ? "flex" : "none");
+    setFirstIcon(scrollVal >= 1 ? "flex" : "none");
     setLastIcon(maxScrollableWidth > scrollVal + 1 ? "flex" : "none");
   };
 
@@ -182,50 +181,49 @@ export default function Tips() {
     <div className='tips'>
       <AppHelmet title={"Tips"} />
       <ScrollToTop />
+      <div className="date-wrapper">
+        <div className="icon" style={{ display: firstIcon }}><MdArrowBackIos className='item' onClick={() => handleClick("left")} /></div>
+        <ul className={`tabs-box ${isDragging ? "dragging" : ""}`} ref={tabBoxRef} style={{
+          overflow: 'auto',
+          whiteSpace: 'nowrap',
+          cursor: isDragging ? 'grabbing' : 'grab',
+          userSelect: 'none'
+        }}>
+          {days && days.map((day) => (
+            <li className={`tab ${(currentDate === day) && 'active'}`} onClick={() => setCurrentDate(day)} key={days.indexOf(day)} aria-label={day}>
+              <span>{returnDate(day).split(" ")[0]}</span>
+              <span>{returnDate(day).split(" ")[1]}  {returnDate(day).split(" ")[2]}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="icon" style={{ display: lastIcon }}><MdArrowForwardIos className='item' onClick={() => handleClick("right")} /></div>
+      </div>
+      <NavLink to={`${user && user.isPremium ? '/plans' : "/pricing"}`} className={"subscribe-btn"}>SUBSCRIBE TO VIEW TIPS</NavLink>
+      <form className="type">
+        <fieldset>
+          <input name="games-type" type="radio" value={"1X2"} id="1X2" checked={gamesType === "1X2"} onChange={(e) => setGamesType(e.target.value)} />
+          <label htmlFor="1X2">WDW (1X2)</label>
+        </fieldset>
+        <fieldset>
+          <input name="games-type" type="radio" value={"CS"} id="CS" checked={gamesType === "CS"} onChange={(e) => setGamesType(e.target.value)} />
+          <label htmlFor="CS">Goals (CS)</label>
+        </fieldset>
+        <fieldset>
+          <input name="games-type" type="radio" value={"GG"} id="GG" checked={gamesType === "GG"} onChange={(e) => setGamesType(e.target.value)} />
+          <label htmlFor="GG">BTTS (GG/NG)</label>
+        </fieldset>
+        <fieldset>
+          <input name="games-type" type="radio" value={"OV_UN"} id="OV_UN" checked={gamesType === "OV_UN"} onChange={(e) => setGamesType(e.target.value)} />
+          <label htmlFor="OV_UN">TOTAL (OV/UN)</label>
+        </fieldset>
+        <fieldset>
+          <input name="games-type" type="radio" value={"DC"} id="DC" checked={gamesType === "DC"} onChange={(e) => setGamesType(e.target.value)} />
+          <label htmlFor="DC">DC 1X2</label>
+        </fieldset>
+      </form>
       {loading && <Loader />}
       {!loading && (
         <>
-          <div className="date-wrapper">
-            <div className="icon" style={{ display: firstIcon }}><MdArrowBackIos className='item' onClick={() => handleClick("left")} /></div>
-            <ul className={`tabs-box ${isDragging ? "dragging" : ""}`} ref={tabBoxRef} style={{
-              overflow: 'auto',
-              whiteSpace: 'nowrap',
-              cursor: isDragging ? 'grabbing' : 'grab',
-              userSelect: 'none'
-            }}>
-              {days && days.map((day) => (
-                <li className={`tab ${(currentDate === day) && 'active'}`} onClick={() => setCurrentDate(day)} key={days.indexOf(day)} aria-label={day}>
-                  <span>{returnDate(day).split(" ")[0]}</span>
-                  <span>{returnDate(day).split(" ")[1]}  {returnDate(day).split(" ")[2]}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="icon" style={{ display: lastIcon }}><MdArrowForwardIos className='item' onClick={() => handleClick("right")} /></div>
-          </div>
-          <NavLink to={`${user && user.isPremium ? '/plans' : "/pricing"}`} className={"subscribe-btn"}>SUBSCRIBE TO VIEW TIPS</NavLink>
-          <form className="type">
-            <fieldset>
-              <input name="games-type" type="radio" value={"1X2"} id="1X2" checked={gamesType === "1X2"} onChange={(e) => setGamesType(e.target.value)} />
-              <label htmlFor="1X2">WDW (1X2)</label>
-            </fieldset>
-            <fieldset>
-              <input name="games-type" type="radio" value={"CS"} id="CS" checked={gamesType === "CS"} onChange={(e) => setGamesType(e.target.value)} />
-              <label htmlFor="CS">Goals (CS)</label>
-            </fieldset>
-            <fieldset>
-              <input name="games-type" type="radio" value={"GG"} id="GG" checked={gamesType === "GG"} onChange={(e) => setGamesType(e.target.value)} />
-              <label htmlFor="GG">BTTS (GG/NG)</label>
-            </fieldset>
-            <fieldset>
-              <input name="games-type" type="radio" value={"OV_UN"} id="OV_UN" checked={gamesType === "OV_UN"} onChange={(e) => setGamesType(e.target.value)} />
-              <label htmlFor="OV_UN">TOTAL (OV/UN)</label>
-            </fieldset>
-            <fieldset>
-              <input name="games-type" type="radio" value={"DC"} id="DC" checked={gamesType === "DC"} onChange={(e) => setGamesType(e.target.value)} />
-              <label htmlFor="DC">DC 1X2</label>
-            </fieldset>
-          </form>
-
           {filteredTips && filteredTips.map(filteredTip => {
             const timeSlotDescription = {
               'Morning': 'Morning (12AM-6AM)',

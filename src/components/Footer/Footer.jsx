@@ -7,17 +7,14 @@ import { useEffect, useState } from 'react';
 
 const Footer = () => {
     const user = useRecoilValue(userState);
-    const [isAdmin, setIsAdmin] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
     const location = useLocation();
 
-
     useEffect(() => {
-        if (user) {
-            if (user.email === 'kkibetkkoir@gmail.com' || user.email === 'charleykibet254@gmail.com' || user.email === 'coongames8@gmail.com') {
-                setIsAdmin(true)
-            } else {
-                setIsAdmin(null);
-            }
+        if (user && ['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'coongames8@gmail.com'].includes(user.email)) {
+            setIsAdmin(true);
+        } else {
+            setIsAdmin(false);
         }
     }, [user]);
     return (
