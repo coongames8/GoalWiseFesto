@@ -146,32 +146,32 @@ export const slides = [
 export const testimonials = [
   {
     id: 1,
-    name: "James Smith",
-    title: "Starter Plan",
+    name: "James Kariuki",
+    title: "Daily Plan",
     description: "The predictions helped me make smarter decisions. Great for casual bettors like me!"
   },
   {
     id: 2,
-    name: "Tommy Lee",
-    title: "Premium Plan",
+    name: "Jonny_john",
+    title: "Monthly Plan",
     description: "The expert analysis and detailed stats are game-changers. Highly recommend the Premium plan!"
   },
   {
     id: 3,
-    name: "Alicia Brown",
-    title: "Platinum Plan",
+    name: "Alicia Chepkoech",
+    title: "Weekly Plan",
     description: "As a serious football fan, the Platinum plan provides unmatched predictions!"
   },
   {
     id: 4,
-    name: "Mark Johnson",
-    title: "Premium Plan",
+    name: "Johnson Nekesa",
+    title: "Daily Plan",
     description: "The real-time updates and in-depth stats are fantastic. Helped me stay ahead of the game!"
   },
   {
     id: 5,
-    name: "Sarah Jane",
-    title: "Platinum Plan",
+    name: "sarah-nduku",
+    title: "Monthly Plan",
     description: "Worth every penny! The predictions are accurate, and the insights are top-notch."
   }
 ]
