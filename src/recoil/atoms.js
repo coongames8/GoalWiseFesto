@@ -39,14 +39,3 @@ export const subscriptionState = atom({
   default: pricings[0],
   effects_UNSTABLE: [persistAtom], // Enable persistence
 });
-
-
-export const planState = atom({
-  key: 'planState',
-  default: {
-    type: "1X2",
-    timeSlot: "Morning (12AM-6AM)",
-    price: 5
-  },
-  effects_UNSTABLE: [persistAtom], // Enable persistence
-});

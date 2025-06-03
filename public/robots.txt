@@ -3,7 +3,7 @@ User-agent: *
 Disallow:
 
 # Specify the sitemap location
-Sitemap: https://254liquors.com/sitemap.xml
+Sitemap: https://goalgenius.onrender.com/sitemap.xml
 
 # (Optional) Restrict access to certain areas
 Disallow: /add-post/

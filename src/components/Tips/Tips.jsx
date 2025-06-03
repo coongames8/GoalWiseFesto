@@ -1,13 +1,13 @@
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
-import TipCard from '../../components/TipCard/TipCard';
+import TipCard from '../TipCard/TipCard';
 import './Tips.scss';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import AppHelmet from '../AppHelmet';
-import ScrollToTop from '../ScrollToTop';
+import AppHelmet from '../../pages/AppHelmet';
+import ScrollToTop from '../../pages/ScrollToTop';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
-import Loader from '../../components/Loader/Loader';
+import Loader from '../Loader/Loader';
 import { getTips } from '../../firebase';
 
 export default function Tips() {
@@ -24,7 +24,7 @@ export default function Tips() {
   const [user, setUser] = useRecoilState(userState);
   const [isAdmin, setAdmin] = useState(false);
   const [filteredTips, setFilteredTips] = useState(null);
-  const [gamesType, setGamesType] = useState("1X2");
+  const [gamesType, setGamesType] = useState("ALL");
   const [tips, setTips] = useState(null);
 
   // 2. Other Constants
@@ -50,7 +50,7 @@ export default function Tips() {
     return date.toLocaleDateString('en-US');
   };
 
-  const returnDate = (dateString) => {
+  /*const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -62,7 +62,30 @@ export default function Tips() {
 
     const options = { weekday: 'short', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
+  };*/
+
+
+  const returnDate = (dateString) => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day); // Month is zero-indexed
+
+    if (isNaN(date.getTime())) {
+      console.error("Invalid date:", dateString);
+      return "Invalid Date";
+    }
+
+    const today = new Date();
+    const isToday =
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+
+    const weekday = date.toLocaleDateString('en-US', { weekday: 'short' });
+    const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+    return isToday ? `${weekday}, Today` : `${weekday} ${monthDay}`;
   };
+
 
   // 4. useEffects
 
@@ -108,8 +131,9 @@ export default function Tips() {
     let dates = [];
     for (let i = 0; i < 7; i++) {
       let date = new Date();
-      date.setDate(date.getDate() - i);
-      dates.push(date.toISOString().split('T')[0]);
+      let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      dates.push(localDate.toISOString().split('T')[0]);
+
     }
     setDays(dates.reverse());
   }, []);
@@ -198,8 +222,20 @@ export default function Tips() {
         </ul>
         <div className="icon" style={{ display: lastIcon }}><MdArrowForwardIos className='item' onClick={() => handleClick("right")} /></div>
       </div>
-      <NavLink to={`${user && user.isPremium ? '/plans' : "/pricing"}`} className={"subscribe-btn"}>SUBSCRIBE TO VIEW TIPS</NavLink>
+      <NavLink to="#pricing" className={"subscribe-btn"}>SUBSCRIBE TO VIEW TIPS</NavLink>
       <form className="type">
+        <fieldset>
+          <input
+            name="games-type"
+            type="radio"
+            value={"ALL"}
+            id="ALL"
+            checked={gamesType === "ALL"}
+            onChange={(e) => setGamesType(e.target.value)}
+          />
+          <label htmlFor="ALL">All Games</label>
+        </fieldset>
+
         <fieldset>
           <input name="games-type" type="radio" value={"1X2"} id="1X2" checked={gamesType === "1X2"} onChange={(e) => setGamesType(e.target.value)} />
           <label htmlFor="1X2">WDW (1X2)</label>
@@ -216,10 +252,10 @@ export default function Tips() {
           <input name="games-type" type="radio" value={"OV_UN"} id="OV_UN" checked={gamesType === "OV_UN"} onChange={(e) => setGamesType(e.target.value)} />
           <label htmlFor="OV_UN">TOTAL (OV/UN)</label>
         </fieldset>
-        <fieldset>
+        {/*<fieldset>
           <input name="games-type" type="radio" value={"DC"} id="DC" checked={gamesType === "DC"} onChange={(e) => setGamesType(e.target.value)} />
           <label htmlFor="DC">DC 1X2</label>
-        </fieldset>
+        </fieldset>*/}
       </form>
       {loading && <Loader />}
       {!loading && (
@@ -234,10 +270,10 @@ export default function Tips() {
 
             return (
               <div className="container" key={filteredTip.timeSlot}>
-                {filteredTip.items && filteredTip.items.filter(doc => doc.type === gamesType).length !== 0 && (<h2 className='title'>{timeSlotDescription}</h2>)}
+                {filteredTip.items && filteredTip.items.filter(doc => gamesType === "ALL" || doc.type === gamesType).length !== 0 && (<h2 className='title'>{timeSlotDescription}</h2>)}
                 <div className="tips-content container">
-                  {filteredTip.items.filter(doc => doc.type === gamesType).map((tip, index) => (
-                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} plan={user && user.plan ? user.plan : null} today={formatDate(days[days.length - 1])} />
+                  {filteredTip.items.filter(doc => gamesType === "ALL" || doc.type === gamesType).map((tip, index) => (
+                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} today={formatDate(days[days.length - 1])} />
                   ))}
                 </div>
               </div>

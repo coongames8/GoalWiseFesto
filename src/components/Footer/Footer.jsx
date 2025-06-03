@@ -45,19 +45,9 @@ const Footer = () => {
                     <h2>GoalGenius</h2>
                     <div className='items-container theme'>
                         <NavLink to='/' title='goal genius' state={{ from: location }}>Home</NavLink>
-                        <NavLink to='/pricing' title='pricing' state={{ from: location }}>Pricing</NavLink>
-                        <NavLink to='/tips' title='tips' state={{ from: location }}>Tips</NavLink>
-                        <NavLink to='/news' title='news' state={{ from: location }}>Our News</NavLink>
-                    </div>
-                </section>
-
-                <section>
-                    <h2>Useful Links</h2>
-                    <div className='items-container theme'>
                         <NavLink to='/login' title='login' state={{ from: location }}>Sign In</NavLink>
                         <NavLink to='/register' title='register' state={{ from: location }}>Get Started</NavLink>
                         <NavLink to='/about' title='about us' state={{ from: location }}>About GoalGenius</NavLink>
-                        <NavLink to='/contact' title='get in touch' state={{ from: location }}>Contact Us</NavLink>
                     </div>
                 </section>
                 {

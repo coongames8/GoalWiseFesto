@@ -9,16 +9,18 @@
     max-width: 650px;
     width: 100%;
     cursor: default;
+    height: fit-content;
     .center{
         width: 100%;
         height: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
         gap: .5rem;
         .teams{
             display: flex;
-            width: 100%;
+            //width: 100%;
+            flex: 1;
             gap: 5px;
             flex-wrap: wrap;
             align-items: center;
@@ -29,7 +31,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-
+                flex: 1;
 
                 overflow: hidden; /* Hide overflow content */
                 display: -webkit-box; /* Use the flexbox model for a multi-line block */
@@ -37,57 +39,61 @@
                 -webkit-box-orient: vertical; /* Set the box to be vertical */
                 text-overflow: ellipsis;
 
+                /* Add these two lines 👇 */
+                    word-break: break-word;
+                    overflow-wrap: break-word;
+
                 &:first-child{
                     text-align: end;
                 }
             }
             .results{
-                width: 80px;
+                width: 50px;
                 background: var(--dark-blue);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 color: var(--lite);
             }
+
+            .name.hidden{
+                color: transparent;
+                text-shadow: 0 0 5px rgba(0,0,0,.2)
+            }
         }
 
-        .info{
-            color: var(--grey);
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
+                .info {
+                    color: var(--grey);
+                    display: flex;
+                    flex-wrap: wrap;
+                    height: 100%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+                    p {
+                        display: flex;
+                        padding: 0 0.3rem 0 0;
+                        align-items: center;
+                        font-size: 13px;
+                        margin-bottom: auto;
+                        flex: 1;
 
-            a{
-                color: var(--dark-blue);
-            }
-            p{
-                display: flex;
-                padding: 0 0.3rem 0 0;
-                align-items: center;
-                font-size: 14px;
-                margin-bottom: auto;
-                span{
-                    margin-left: 5px;
-                    &.won{
-                        color: var(--blue);
-                    }
-                    &.lost{
-                        color: var(--red);
-                    }
+                        span {
+                            font-weight: 800;
+                            &.won {
+                                color: var(--blue);
+                            }
 
-                    &.pending{
-                        color: var(--grey);
-                    }
+                            &.lost {
+                                color: var(--red);
+                            }
 
-                    .icon{
-                        font-size: 14px;
-                        margin: 0 5px;
+                            &.pending {
+                                color: var(--dark-green);
+                            }
+                        }
+
                     }
                 }
-
-            }
-        }
     }
 }

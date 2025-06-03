@@ -9,13 +9,48 @@ export default function Pricing() {
   return (
     <div className='pricing' id='pricing'>
       <h1 className='head'>Pricing</h1>
-      <h2>What fits you the best?</h2>
+      <div className="pricing-header">
+        <div className="plans-switch-container">
+          <div className="plans-options">
+            <label>
+              <input
+                type="radio"
+                name="billing"
+                value="Day"
+                checked={billing === "Day"}
+                onChange={() => setBilling("Day")}
+              />
+              Daily
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="billing"
+                value="Week"
+                checked={billing === "Week"}
+                onChange={() => setBilling("Week")}
+              />
+              Weekly
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="billing"
+                value="Month"
+                checked={billing === "Month"}
+                onChange={() => setBilling("Month")}
+              />
+              Monthly
+            </label>
+          </div>
+        </div>
+
+      </div>
       <div className="wrapper">
         {
-          pricings.map(pricing => {
+          pricings.filter(item => item.billing === billing).map(pricing => {
             return (
               <div key={pricing.id}>
-                <h1>{pricing.plan}</h1>
                 <h2><span>KSH {pricing.price}</span>/{pricing.billing}</h2>
                 <p>{pricing.title}</p>
                 <h3>Features</h3>

@@ -40,7 +40,7 @@ export default function Subscription() {
     }, setNotification).then(() => {
       getUser(user.email, setUser);
     }).then(() => {
-      navigate("/plans", { replace: true });
+      navigate("/", { replace: true });
     });
   };
 

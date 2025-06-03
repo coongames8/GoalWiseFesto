@@ -24,7 +24,7 @@ export const pricings = [
     plan: "Weekly",
     billing: "Week",
     title: "Exclusive weekly access to expert tips",
-    price: 1950,
+    price: 1400,
     features: [
       "20+ odds daily",
       "7 Days Tips",
@@ -37,7 +37,7 @@ export const pricings = [
     plan: "Monthly",
     billing: "Month",
     title: "Comprehensive predictions for dedicated fans",
-    price: 4200,
+    price: 3500,
     features: [
       "20+ odds per day",
       "Priority Customer Support",
@@ -101,21 +101,21 @@ export const featured = [
     title: "100% Guaranteed"
   },
   {
+    emoji: "✅",
+    title: "Secure Payments"
+  },
+  {
     emoji: "🏆",
     title: "Expert Analysis"
   },
   {
     emoji: "🚀",
     title: "Live Updates"
-  },
-  {
-    emoji: "✅",
-    title: "Secure Payments"
   }
 ]
 
 export const socialUrls = [
-  { id: 1, icon: <IoLogoFacebook />, url: "https://www.facebook.com/profile.php?id=61570224237201", title: "Facebook" },
+  { id: 1, icon: <IoLogoFacebook />, url: "https://www.facebook.com/profile.php?id=699140333272591", title: "Facebook" },
   { id: 2, icon: <FaTelegram />, url: "https://t.me/bet365gurus", title: "Telegram" },
   { id: 3, icon: <IoLogoWhatsapp />, url: "https://whatsapp.com/channel/0029VayjRf71t90afonqcy0b", title: "WhatsApp" },
   { id: 4, icon: <PiXLogo />, url: "https://x.com/goalgeniusvip", title: "X(Twitter)" },

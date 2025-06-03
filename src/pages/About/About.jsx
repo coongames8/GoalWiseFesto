@@ -10,7 +10,7 @@ const About = () => {
     return (
         <div className="about">
             <ScrollToTop />
-            <AppHelmet title={"About"}/>
+            <AppHelmet title={"About"} />
             <div className="about-us">
                 <div className="info">
                     <h1>About Us</h1>
@@ -31,7 +31,8 @@ const About = () => {
                 </div>
             </div>
             <Faq />
-            <h1>What Our Clients Say:</h1>
+            <h1>Testimonials</h1>
+            <h2>What clients say</h2>
             <Testimonials />
             <Newsletter />
         </div>

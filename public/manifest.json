@@ -1,17 +1,17 @@
 {
-    "short_name": "GOAL GENIUS",
-    "name": "GOAL GENIUS",
-    "homepage": "https://254liquors.com/",
-    "version": "0.1.0",
-    "description": "Get expert football tips, accurate match predictions, live scores, and the latest betting odds. Stay updated with fixtures and results from top leagues worldwide",
-    "icons": [
-      {
-        "src": "favicon.ico",
-        "sizes": "64x64 32x32 24x24 16x16",
-        "type": "image/x-icon"
-      }
-    ],
-    "shortcuts": [
+  "short_name": "GOAL GENIUS",
+  "name": "GOAL GENIUS",
+  "homepage": "https://goalgenius.onrender.com/",
+  "version": "0.1.0",
+  "description": "Get expert football tips, accurate match predictions, live scores, and the latest betting odds. Stay updated with fixtures and results from top leagues worldwide",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
     {
       "name": "View Latest Tips",
       "short_name": "Latest Tips",
@@ -100,32 +100,58 @@
         }
       ]
     }
-    ],
-    "service_worker": {
-      "src": "/service-worker.js",
-      "scope": "/",
-      "type": "classic"
-    },
-    "developer": {
-      "name": "GOAL GENIUS",
-      "url": "https://254liquors.com/"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/Kkibe/powerking-aruna"
-    },
-    "license": "ISC/MIT",
-    "keywords": [
-      "football tips", "football predictions", "live football scores", "football betting odds", "football results", "football fixtures", "football leagues", "football betting", "live football updates", " soccer predictions", " betting tips", " live match scores", " football match results", " match schedules", " football stats", " football news", " league standings", " football competitions", " soccer betting odds"
-    ],
-    "dir": "ltr",
-    "lang": "en",
-    "start_url": "/",
+  ],
+  "service_worker": {
+    "src": "/service-worker.js",
     "scope": "/",
-    "display": "standalone",
-    "theme_color": "#1f4568",
-    "background_color": "#ebf4fc",
-    "orientation": "portrait",
-    "categories": ["Utilities", "Sports", "Betting", "Productivity", "Social", "News", "Tools", "Gambling"]
-  
-  }
+    "type": "classic"
+  },
+  "developer": {
+    "name": "GOAL GENIUS",
+    "url": "https://goalgenius.onrender.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kkibe/powerking-aruna"
+  },
+  "license": "ISC/MIT",
+  "keywords": [
+    "football tips",
+    "football predictions",
+    "live football scores",
+    "football betting odds",
+    "football results",
+    "football fixtures",
+    "football leagues",
+    "football betting",
+    "live football updates",
+    " soccer predictions",
+    " betting tips",
+    " live match scores",
+    " football match results",
+    " match schedules",
+    " football stats",
+    " football news",
+    " league standings",
+    " football competitions",
+    " soccer betting odds"
+  ],
+  "dir": "ltr",
+  "lang": "en",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0A6847",
+  "background_color": "#d0ffc4",
+  "orientation": "portrait",
+  "categories": [
+    "Utilities",
+    "Sports",
+    "Betting",
+    "Productivity",
+    "Social",
+    "News",
+    "Tools",
+    "Gambling"
+  ]
+}

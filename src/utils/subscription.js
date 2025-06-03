@@ -1,4 +1,4 @@
-import { updateUser, updateUserPlan } from "../firebase";
+import { updateUser } from "../firebase";
 
 
 export const checkSubscriptionStatus = (user, setNotification) => {
@@ -17,6 +17,5 @@ export const checkSubscriptionStatus = (user, setNotification) => {
 
   if (timeDifference >= timeLimits[user.subscription.billing]) {
     updateUser(user.email, false, null, setNotification);
-    updateUserPlan(user.email, null, setNotification)
   }
 };
