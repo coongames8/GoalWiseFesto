@@ -276,7 +276,7 @@ export default function Tips() {
                 {filteredTip.items && filteredTip.items.filter(doc => gamesType === "ALL" || doc.type === gamesType).length !== 0 && (<h2 className='title'>{timeSlotDescription}</h2>)}
                 <div className="tips-content container">
                   {filteredTip.items.filter(doc => gamesType === "ALL" || doc.type === gamesType).map((tip, index) => (
-                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} currentDate={currentDate} gamesType={gamesType} today={formatDate(days[days.length - 1])} />
+                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} today={formatDate(days[days.length - 1])} />
                   ))}
                 </div>
               </div>
