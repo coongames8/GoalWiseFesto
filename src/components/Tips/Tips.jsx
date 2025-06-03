@@ -50,7 +50,8 @@ export default function Tips() {
     return date.toLocaleDateString('en-US');
   };
 
-  const returnDate = (dateString) => {
+
+  /*const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -62,10 +63,10 @@ export default function Tips() {
 
     const options = { weekday: 'short', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
-  };
+  };*/
 
 
-  /*const returnDate = (dateString) => {
+  const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -84,7 +85,7 @@ export default function Tips() {
     const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
     return isToday ? `${weekday}, Today` : `${weekday} ${monthDay}`;
-  };*/
+  };
 
 
   // 4. useEffects
@@ -127,14 +128,15 @@ export default function Tips() {
 
 
 
-    // Fetch last 7 days of dates
+  // Fetch last 7 days of dates
   useEffect(() => {
     let dates = [];
-    for (let i = 0; i < 70; i++) {
-      let date = new Date();
-      date.setDate(date.getDate() - i);
-      let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      dates.push(localDate.toISOString().split('T')[0]);
+    const today = new Date();
+    for (let i = 0; i < 14; i++) {
+      const date = new Date(today); // clone once
+      date.setDate(today.getDate() - i);
+      //let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      dates.push(date.toISOString().split('T')[0]);
     }
     setDays(dates.reverse());
   }, []);
@@ -274,7 +276,7 @@ export default function Tips() {
                 {filteredTip.items && filteredTip.items.filter(doc => gamesType === "ALL" || doc.type === gamesType).length !== 0 && (<h2 className='title'>{timeSlotDescription}</h2>)}
                 <div className="tips-content container">
                   {filteredTip.items.filter(doc => gamesType === "ALL" || doc.type === gamesType).map((tip, index) => (
-                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} today={formatDate(days[days.length - 1])} />
+                    <TipCard key={index} tip={tip} timeSlot={timeSlotDescription} isAdmin={isAdmin} currentDate={currentDate} gamesType={gamesType} today={formatDate(days[days.length - 1])} />
                   ))}
                 </div>
               </div>

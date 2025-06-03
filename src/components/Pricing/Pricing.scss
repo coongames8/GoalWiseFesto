@@ -1,47 +1,55 @@
-.pricing{
+.pricing {
     width: 100%;
     //background: var(--light-color);
     position: relative;
 
-        .pricing-header {
+    .pricing-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .plans-switch-container {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-                        .plans-switch-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
 
-                            .plans-options {
-                                background: var(--dark-blue);
-                                border-radius: 30px;
-                                display: flex;
-                                gap: 10px;
-                                padding: 6px;
+            .plans-options {
+                min-width: 300px;
+                background: var(--dark-blue);
+                border-radius: 30px;
+                display: flex;
+                gap: 10px;
+                padding: 6px;
+                align-items: center;
+                justify-content: space-evenly;
 
-                                input[type="radio"] {
-                                    display: none;
-                                }
+                input[type="radio"] {
+                    display: none;
+                }
 
-                                label {
-                                    color: #fff;
-                                    padding: 8px 16px;
-                                    border-radius: 20px;
-                                    cursor: pointer;
-                                    transition: background 0.3s;
+                label {
+                    color: #fff;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    transition: background 0.3s;
 
-                                    &:hover {
-                                        background: rgba(255, 255, 255, 0.1);
-                                    }
-                                }
-                                label:has(input[type="radio"]:checked) {
-                                background: var(--green);
-                                    font-weight: bold;
-                                }
-                            }
-                        }
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.1);
+                    }
+                }
+
+                label:has(input[type="radio"]:checked) {
+                    background: var(--green);
+                    font-weight: bold;
+                }
+            }
         }
-    .wrapper{
+    }
+
+    .wrapper {
         width: 100%;
         display: flex;
         align-items: center;
@@ -50,9 +58,9 @@
         gap: 10px;
         margin-top: 10px;
 
-        > div{
+        >div {
             width: calc((100% - 100px)/ 3);
-            min-width: 290px;
+            min-width: 300px;
             height: inherit;
             box-shadow: var(--shadow);
             display: flex;
@@ -68,17 +76,18 @@
             border-radius: 10px;
             overflow: hidden;
 
-            h1{
+            h1 {
                 color: var(--dark-blue);
             }
 
 
-            h2{
-                span{
+            h2 {
+                span {
                     font-weight: bolder;
                 }
             }
-            ul{
+
+            ul {
                 width: 100%;
                 list-style-type: circle;
                 //padding-left: 10px;
@@ -98,7 +107,7 @@
                 object-position: center;
             }
 
-            > .btn{
+            >.btn {
                 z-index: 2;
                 width: 100%;
                 //padding: 8px 60px;

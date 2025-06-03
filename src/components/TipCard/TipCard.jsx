@@ -6,7 +6,7 @@ import { BiEdit } from "react-icons/bi";
 import { userNameSelector } from "../../recoil/selectors";
 import { useRecoilValue } from "recoil";
 
-export default function TipCard({ tip, isAdmin, today }) {
+export default function TipCard({ tip, isAdmin, today, currentDate, gamesType }) {
     const [hidden, setHidden] = useState(true);
     const isPremiumUser = useRecoilValue(userNameSelector);
 
@@ -25,7 +25,7 @@ export default function TipCard({ tip, isAdmin, today }) {
             setHidden(false);
         }
 
-    }, [isPremiumUser, isAdmin]);
+    }, [isPremiumUser, isAdmin, currentDate, gamesType]);
 
     function getTipStatus(tip) {
         if (tip.status === "pending") {
@@ -51,10 +51,18 @@ export default function TipCard({ tip, isAdmin, today }) {
 
 
     return (
-        <div className="tip-card" style={{ borderLeft: hidden ? "2px solid #0A6847" : "2px solid #059212" }}>
+        <div className="tip-card" style={{ borderLeft: tip.premium ? "2px solid gold" : "2px solid silver" }}>
+            <div className="top">
+                <p style={{
+                    backgroundColor: tip.premium ? "gold" : "silver",
+                    padding: '3px',
+                }}>odd: {tip.odd}</p>
+                {isAdmin && <NavLink to={"/edit-tip"} state={tip}><BiEdit /></NavLink>}
+                {<div className="tag" style={{ backgroundColor: tip.premium ? "gold" : "white" }}>{tip.premium ? "💎" : "🔓"}</div>}
+            </div>
+
             <div className="center">
                 <div className='info time-card'>
-                    <p>{tip.premium ? "👑" : "🆓"}</p>
                     <p>{tip.time}</p>
                 </div>
                 <div className="teams">
@@ -64,7 +72,6 @@ export default function TipCard({ tip, isAdmin, today }) {
                 </div>
                 <div className='info'>
                     <p>{tip.results ? tip.results : "?-?"}</p>
-                    {isAdmin && <NavLink to={"/edit-tip"} state={tip}><BiEdit /></NavLink>}
                     <p>{getTipStatus(tip)}</p>
                 </div>
             </div>
