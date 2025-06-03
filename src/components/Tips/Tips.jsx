@@ -50,7 +50,7 @@ export default function Tips() {
     return date.toLocaleDateString('en-US');
   };
 
-  /*const returnDate = (dateString) => {
+  const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -62,10 +62,10 @@ export default function Tips() {
 
     const options = { weekday: 'short', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
-  };*/
+  };
 
 
-  const returnDate = (dateString) => {
+  /*const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -84,7 +84,7 @@ export default function Tips() {
     const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
     return isToday ? `${weekday}, Today` : `${weekday} ${monthDay}`;
-  };
+  };*/
 
 
   // 4. useEffects
@@ -126,14 +126,15 @@ export default function Tips() {
   }, [isDragging, startX, scrollLeft]);
 
 
-  // Fetch last 7 days of dates
+
+    // Fetch last 7 days of dates
   useEffect(() => {
     let dates = [];
-    for (let i = 0; i < 7; i++) {
-        let date = new Date(); // today
-        date.setDate(date.getDate() - i); // subtract i days
-        let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        dates.push(localDate.toISOString().split('T')[0]);
+    for (let i = 0; i < 70; i++) {
+      let date = new Date();
+      date.setDate(date.getDate() - i);
+      let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      dates.push(localDate.toISOString().split('T')[0]);
     }
     setDays(dates.reverse());
   }, []);
