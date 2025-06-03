@@ -6,7 +6,7 @@ import { BiEdit } from "react-icons/bi";
 import { userNameSelector } from "../../recoil/selectors";
 import { useRecoilValue } from "recoil";
 
-export default function TipCard({ tip, isAdmin, today, currentDate, gamesType }) {
+export default function TipCard({ tip, isAdmin, today }) {
     const [hidden, setHidden] = useState(true);
     const isPremiumUser = useRecoilValue(userNameSelector);
 
@@ -25,7 +25,7 @@ export default function TipCard({ tip, isAdmin, today, currentDate, gamesType })
             setHidden(false);
         }
 
-    }, [isPremiumUser, isAdmin, currentDate, gamesType]);
+    }, [isPremiumUser, isAdmin, tip]);
 
     function getTipStatus(tip) {
         if (tip.status === "pending") {
