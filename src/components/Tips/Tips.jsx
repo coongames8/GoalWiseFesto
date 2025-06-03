@@ -65,7 +65,7 @@ export default function Tips() {
   };
 
 
-  /*const returnDate = (dateString) => {
+  const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -84,7 +84,7 @@ export default function Tips() {
     const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
     return isToday ? `${weekday}, Today` : `${weekday} ${monthDay}`;
-  };*/
+  };
 
 
   // 4. useEffects
@@ -130,10 +130,10 @@ export default function Tips() {
   useEffect(() => {
     let dates = [];
     for (let i = 0; i < 7; i++) {
-      let date = new Date();
-      let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      dates.push(localDate.toISOString().split('T')[0]);
-
+        let date = new Date(); // today
+        date.setDate(date.getDate() - i); // subtract i days
+        let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        dates.push(localDate.toISOString().split('T')[0]);
     }
     setDays(dates.reverse());
   }, []);
