@@ -66,7 +66,7 @@ export default function Tips() {
   };*/
 
 
- /* const returnDate = (dateString) => {
+ const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Month is zero-indexed
 
@@ -85,8 +85,8 @@ export default function Tips() {
     const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
     return isToday ? `${weekday}, Today` : `${weekday} ${monthDay}`;
-  };*/
-const returnDate = (dateString) => {
+  };
+/*const returnDate = (dateString) => {
   // Parse the date string properly (YYYY-MM-DD format)
   const [year, month, day] = dateString.split('-').map(Number);
   const date = new Date(year, month - 1, day);
@@ -94,7 +94,7 @@ const returnDate = (dateString) => {
   // Format using locale-aware methods
   const options = { weekday: 'short', month: 'short', day: 'numeric' };
   return date.toLocaleDateString('en-US', options);
-};
+};*/
 
   // 4. useEffects
 
