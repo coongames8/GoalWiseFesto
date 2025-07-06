@@ -11,7 +11,6 @@ import Loader from '../Loader/Loader';
 import { getTips } from '../../firebase';
 
 export default function Tips() {
-  // 1. State Variables (useState)
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -27,10 +26,8 @@ export default function Tips() {
   const [gamesType, setGamesType] = useState("ALL");
   const [tips, setTips] = useState(null);
 
-  // 2. Other Constants
   const tabBoxRef = useRef();
 
-  // 3. Functions
   const handleIcons = () => {
     let scrollVal = Math.round(tabBoxRef.current.scrollLeft);
     let maxScrollableWidth = tabBoxRef.current.scrollWidth - tabBoxRef.current.clientWidth;
@@ -38,37 +35,19 @@ export default function Tips() {
     setLastIcon(maxScrollableWidth > scrollVal + 1 ? "flex" : "none");
   };
 
-
   const handleClick = (direction) => {
     const scrollAmount = direction === "left" ? -350 : 350;
     tabBoxRef.current.scrollLeft += scrollAmount;
   };
-
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US');
   };
 
-
-  /*const returnDate = (dateString) => {
+  const returnDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
-    const date = new Date(year, month - 1, day); // Month is zero-indexed
-
-    // Check if the date is invalid
-    if (isNaN(date.getTime())) {
-      console.error("Invalid date:", dateString);
-      return "Invalid Date";
-    }
-
-    const options = { weekday: 'short', month: 'short', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  };*/
-
-
- const returnDate = (dateString) => {
-    const [year, month, day] = dateString.split('-').map(Number);
-    const date = new Date(year, month - 1, day); // Month is zero-indexed
+    const date = new Date(year, month - 1, day);
 
     if (isNaN(date.getTime())) {
       console.error("Invalid date:", dateString);
@@ -86,17 +65,6 @@ export default function Tips() {
 
     return isToday ? `${weekday}, Today` : `${weekday} ${monthDay}`;
   };
-/*const returnDate = (dateString) => {
-  // Parse the date string properly (YYYY-MM-DD format)
-  const [year, month, day] = dateString.split('-').map(Number);
-  const date = new Date(year, month - 1, day);
-  
-  // Format using locale-aware methods
-  const options = { weekday: 'short', month: 'short', day: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
-};*/
-
-  // 4. useEffects
 
   useEffect(() => {
     const tabBox = tabBoxRef.current;
@@ -111,7 +79,7 @@ export default function Tips() {
       if (!isDragging) return;
       e.preventDefault();
       const x = e.pageX - tabBox.offsetLeft;
-      const walk = (x - startX) * 5; // Adjust scroll speed
+      const walk = (x - startX) * 5;
       tabBox.scrollLeft = scrollLeft - walk;
     };
 
@@ -130,59 +98,40 @@ export default function Tips() {
       tabBox.removeEventListener('mousemove', mouseMoveHandler);
       tabBox.removeEventListener('mouseup', mouseUpHandler);
       tabBox.removeEventListener('mouseleave', mouseUpHandler);
-      tabBox.removeEventListener('scroll', handleIcons); // Cleanup scroll listener
+      tabBox.removeEventListener('scroll', handleIcons);
     };
   }, [isDragging, startX, scrollLeft]);
 
-
-
-  // Fetch last 7 days of dates
-  /*useEffect(() => {
+  useEffect(() => {
     let dates = [];
     const today = new Date();
+    
     for (let i = 0; i < 14; i++) {
-      const date = new Date(today); // clone once
-      date.setDate(today.getDate() - i);
-      //let localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      dates.push(date.toISOString().split('T')[0]);
+      let date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      dates.push(`${year}-${month}-${day}`);
     }
     setDays(dates.reverse());
-  }, []);*/
-  useEffect(() => {
-  let dates = [];
-  const today = new Date();
-  
-  for (let i = 0; i < 14; i++) {
-    let date = new Date(today);
-    date.setDate(date.getDate() - i);
-    // Use local date components
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    dates.push(`${year}-${month}-${day}`);
-  }
-  setDays(dates.reverse());
-}, []);
+  }, []);
 
-  // Set currentDate when days is available
   useEffect(() => {
     days && setCurrentDate(days[days.length - 1]);
   }, [days]);
-
 
   useEffect(() => {
     if (!tabBoxRef.current) return;
     const tabBox = tabBoxRef.current;
     tabBox.scrollLeft = tabBox.scrollWidth - tabBox.clientWidth;
     handleIcons();
-  }, [tabBoxRef.current]); // Depend on `tabBoxRef.current`
-
+  }, [tabBoxRef.current]);
 
   useEffect(() => {
     getTips(setTips, setLoading, formatDate(currentDate));
   }, [currentDate]);
 
-  // Filter tips into time slots
   useEffect(() => {
     if (tips !== null) {
       const groupedData = tips.reduce((acc, item) => {
@@ -218,7 +167,6 @@ export default function Tips() {
     }
   }, [tips]);
 
-  // Update premium status based on user state
   useEffect(() => {
     if (user && ['kkibetkkoir@gmail.com', 'charleykibet254@gmail.com', 'coongames8@gmail.com'].includes(user.email)) {
       setAdmin(true);
@@ -261,7 +209,6 @@ export default function Tips() {
           />
           <label htmlFor="ALL">All Games</label>
         </fieldset>
-
         <fieldset>
           <input name="games-type" type="radio" value={"1X2"} id="1X2" checked={gamesType === "1X2"} onChange={(e) => setGamesType(e.target.value)} />
           <label htmlFor="1X2">WDW (1X2)</label>
@@ -278,10 +225,6 @@ export default function Tips() {
           <input name="games-type" type="radio" value={"OV_UN"} id="OV_UN" checked={gamesType === "OV_UN"} onChange={(e) => setGamesType(e.target.value)} />
           <label htmlFor="OV_UN">TOTAL (OV/UN)</label>
         </fieldset>
-        {/*<fieldset>
-          <input name="games-type" type="radio" value={"DC"} id="DC" checked={gamesType === "DC"} onChange={(e) => setGamesType(e.target.value)} />
-          <label htmlFor="DC">DC 1X2</label>
-        </fieldset>*/}
       </form>
       {loading && <Loader />}
       {!loading && (
