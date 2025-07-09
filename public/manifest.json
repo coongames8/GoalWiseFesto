@@ -1,7 +1,7 @@
 {
-  "short_name": "GOAL GENIUS",
-  "name": "GOAL GENIUS",
-  "homepage": "https://goalgenius.onrender.com/",
+  "short_name": "GOAL WISE",
+  "name": "GOAL WISE",
+  "homepage": "https://goalwise.onrender.com/",
   "version": "0.1.0",
   "description": "Get expert football tips, accurate match predictions, live scores, and the latest betting odds. Stay updated with fixtures and results from top leagues worldwide",
   "icons": [
@@ -107,8 +107,8 @@
     "type": "classic"
   },
   "developer": {
-    "name": "GOAL GENIUS",
-    "url": "https://goalgenius.onrender.com/"
+    "name": "GOAL WISE",
+    "url": "https://goalwise.onrender.com/"
   },
   "repository": {
     "type": "git",

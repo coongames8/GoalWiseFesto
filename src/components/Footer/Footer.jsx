@@ -42,12 +42,12 @@ const Footer = () => {
 
             <div className='section-wrapper theme'>
                 <section>
-                    <h2>GoalGenius</h2>
+                    <h2>GoalWise</h2>
                     <div className='items-container theme'>
-                        <NavLink to='/' title='goal genius' state={{ from: location }}>Home</NavLink>
+                        <NavLink to='/' title='goal wise' state={{ from: location }}>Home</NavLink>
                         <NavLink to='/login' title='login' state={{ from: location }}>Sign In</NavLink>
                         <NavLink to='/register' title='register' state={{ from: location }}>Get Started</NavLink>
-                        <NavLink to='/about' title='about us' state={{ from: location }}>About GoalGenius</NavLink>
+                        <NavLink to='/about' title='about us' state={{ from: location }}>About Us</NavLink>
                     </div>
                 </section>
                 {
@@ -64,7 +64,7 @@ const Footer = () => {
             </div>
             <hr />
             <div className='footer-bottom theme'>
-                <p>&copy; GoalGenius {new Date().getFullYear()}</p>
+                <p>&copy; GoalWise {new Date().getFullYear()}</p>
                 <NavLink to="/about/#faq" title='help' state={{ from: location }}>FAQ</NavLink>
             </div>
         </div>

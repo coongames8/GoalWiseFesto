@@ -21,7 +21,7 @@ export default function AppHelmet({ title }) {
         content="Get all the latest ✓Fixed VIP Tips ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions, including the Premier League, Championship and across the world."
       />
       <meta name="keywords" content="Football Predictions, Betting Odds, Live Scores, Live Sports, Football Results, Football Fixtures, Football Today, Premier League, Championship, Super Sports, Laliga, Bundesliga, Serie A" />
-      <meta name="author" content="GOAL GENIUS" />
+      <meta name="author" content="GOAL WISE" />
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph tags for social media */}
@@ -43,7 +43,7 @@ export default function AppHelmet({ title }) {
       />
       <meta name="twitter:image" content={`${window.location.origin}/logo512.png`} />
 
-      <title>{title} | GOAL GENIUS - Fixed VIP Football Tips & Predictions, Insights and News</title>
+      <title>{title} | GOAL WISE - Fixed VIP Football Tips & Predictions, Insights and News</title>
     </Helmet>
   );
 }

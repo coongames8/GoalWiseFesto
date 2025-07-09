@@ -1,9 +1,9 @@
 {
-  "name": "goalgenius",
+  "name": "goalwise",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://goalgenius.onrender.com/",
+  "homepage": "https://goalwise.onrender.com/",
   "proxy": "*",
   "scripts": {
     "dev": "vite",

@@ -95,6 +95,6 @@ self.addEventListener('push', (event) => {
         badge: '/logo128.png'
     };
     event.waitUntil(
-        self.registration.showNotification('GOAL GENIUS', options)
+        self.registration.showNotification('GOAL WISE', options)
     );
 });
