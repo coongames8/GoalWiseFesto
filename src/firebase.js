@@ -3,13 +3,13 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBRsIe-rkTTFYt4tMMKThKHIqHJqdOb6fY",
-  authDomain: "goalwise-d4b47.firebaseapp.com",
-  projectId: "goalwise-d4b47",
-  storageBucket: "goalwise-d4b47.firebasestorage.app",
-  messagingSenderId: "748605780526",
-  appId: "1:748605780526:web:fedd90a9fe52c619b525bf",
-  measurementId: "G-XWG3DNJTV8"
+  apiKey: "AIzaSyDdzgeQpJyKlalVoQ-q4-msajNdgss6OGU",
+  authDomain: "football2024-f741a.firebaseapp.com",
+  projectId: "football2024-f741a",
+  storageBucket: "football2024-f741a.appspot.com",
+  messagingSenderId: "988342307794",
+  appId: "1:988342307794:web:5ccfbf8aedc2f008f4d60b",
+  measurementId: "G-859K193TXV"
 };
 
 const app = initializeApp(firebaseConfig);
