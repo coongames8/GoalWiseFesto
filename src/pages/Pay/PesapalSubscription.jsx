@@ -288,7 +288,6 @@ export default function PesapalSubscription() {
       `,
       showConfirmButton: false,
       showCloseButton: true,
-      width: '900px',
       customClass: {
         popup: 'payment-modal-popup'
       },
@@ -810,6 +809,16 @@ const additionalStyles = `
 /* Loading spinner for button */
 .fa-spinner {
   animation: spin 1s linear infinite;
+}
+
+/* Override SweetAlert2 default styles for payment modal only */
+.swal2-popup.payment-modal-popup {
+  padding: 0 !important;
+}
+
+.swal2-popup.payment-modal-popup .swal2-title {
+  padding: 1rem !important;
+  margin: 0 !important;
 }
 `;
 
