@@ -46,7 +46,7 @@ export default function KoraPayments() {
 
   const handlePayment = () => {
     const paymentOptions = {
-        key: "pk_live_KxNb5jDg18CQtJWzJt1RdgyMNsRo4D9NanrmE7nP",
+        key: "pk_live_v3G6gawdvs1ugJmqo3cfQaGJS5njbJTrjLyxT2gB",
         reference: (new Date()).getTime().toString(),
         amount: data != null ? data.price : subscription.price,
         currency: "KES",
