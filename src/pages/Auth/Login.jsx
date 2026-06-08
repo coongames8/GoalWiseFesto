@@ -34,7 +34,7 @@ export const Login = () => {
             <form onSubmit={handleLogin}>
                 <h1>Welcome Back</h1>
                 <label htmlFor="email">Email:</label>
-                <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <label htmlFor="password">Password:</label>
                 <input type="password" id='password' placeholder="******" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <button type='submit' className='btn'>SIGN IN</button>
