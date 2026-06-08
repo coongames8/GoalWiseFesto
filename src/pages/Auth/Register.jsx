@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 import './Auth.scss'
 import { registerUser } from '../../firebase';
 import AppHelmet from '../AppHelmet';
@@ -12,11 +12,12 @@ export const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setNotification = useSetRecoilState(notificationState);
+  const navigate = useNavigate(); // Add this
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (email && password) {
-      registerUser(username, email, password, setNotification);
+      registerUser(username, email, password, setNotification, navigate); // Pass navigate
     } else {
       setNotification({
         isVisible: true,
@@ -24,7 +25,6 @@ export const Register = () => {
         message: "You have entered an invalid email address!",
       });
     };
-    return;
   }
 
   return (
@@ -34,7 +34,7 @@ export const Register = () => {
       <form onSubmit={handleRegister}>
         <h1>Get Started</h1>
         <label htmlFor="email">Email:</label>
-        <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' required />
+        <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
         <label htmlFor="username">Username:</label>
         <input type="text" id='username' placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} pattern={'/^[a-zA-Z0-9._-]{4,15}$/'} required />
         <span>username should be between 4 and 15 characters long and can include letters, numbers, underscores (_), periods (.), and hyphens (-).</span>

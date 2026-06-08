@@ -21,7 +21,7 @@ const Newsletter = () => {
                 Kindly fill the form below.
             </p>
             <form onSubmit={handleSubmit}>
-                <input type='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/'/>
+                <input type='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
                 <button type='submit'>
                     SUBMIT
                 </button>

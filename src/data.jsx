@@ -11,7 +11,7 @@ export const pricings = [
     plan: "Daily",
     billing: "Day",
     title: "Full access to daily predictions",
-    price: 250,
+    price: 240,
     features: [
       "Daily match predictions",
       "Fixed Correct Score",
@@ -24,7 +24,7 @@ export const pricings = [
     plan: "Weekly",
     billing: "Week",
     title: "Exclusive weekly access to expert tips",
-    price: 800,
+    price: 850,
     features: [
       "20+ odds daily",
       "7 Days Tips",

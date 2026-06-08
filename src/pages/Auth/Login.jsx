@@ -1,5 +1,5 @@
 import {useState } from 'react';
-import {NavLink } from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import './Auth.scss'
 import { signInUser } from '../../firebase';
 import AppHelmet from '../AppHelmet';
@@ -12,11 +12,12 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setNotification = useSetRecoilState(notificationState);
+  const navigate = useNavigate(); // Add this
 
   const handleLogin = (e) => {
     e.preventDefault();
     if(email && password) {
-      signInUser(email, password, setNotification)
+      signInUser(email, password, setNotification, navigate); // Pass navigate
     } else {
       setNotification({
         isVisible: true,
@@ -33,7 +34,7 @@ export const Login = () => {
             <form onSubmit={handleLogin}>
                 <h1>Welcome Back</h1>
                 <label htmlFor="email">Email:</label>
-                <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/'/>
+                <input type="email" id='email' placeholder="example@company.com" value={email} onChange={(e) => setEmail(e.target.value)} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
                 <label htmlFor="password">Password:</label>
                 <input type="password" id='password' placeholder="******" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <button type='submit' className='btn'>SIGN IN</button>

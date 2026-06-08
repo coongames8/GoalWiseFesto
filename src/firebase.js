@@ -16,13 +16,14 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-export const signInUser = (email, password, setNotification) => {
+export const signInUser = async (email, password, setNotification, navigate) => {
   signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
     setNotification({
       isVisible: true,
       type: 'success',
       message: "Welcome Back!",
     });
+    navigate('/'); // Add redirect
   }).catch(async (error) => {
     const errorMessage = await error.message;
     setNotification({
@@ -31,10 +32,9 @@ export const signInUser = (email, password, setNotification) => {
       message: errorMessage,
     });
   });
-  return;
 }
 
-export const registerUser = (username, email, password, setNotification) => {
+export const registerUser = async (username, email, password, setNotification, navigate) => {
   createUserWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
     const user = userCredential.user;
     const userDocRef = doc(db, "users", user.email);
@@ -43,7 +43,7 @@ export const registerUser = (username, email, password, setNotification) => {
       return setNotification({
         isVisible: true,
         type: 'error',
-        message: "The user already exists! Login insted.",
+        message: "The user already exists! Login instead.",
       });
     }
     await setDoc(userDocRef, {
@@ -57,6 +57,7 @@ export const registerUser = (username, email, password, setNotification) => {
         type: 'success',
         message: `User with ${user.email} has been registered successfully`,
       });
+      navigate('/'); // Add redirect here
     }).catch(async (error) => {
       const errorMessage = await error.message;
       setNotification({
@@ -73,7 +74,6 @@ export const registerUser = (username, email, password, setNotification) => {
       message: errorMessage,
     });
   });
-  return;
 }
 
 export const updateUser = async (userId, isPremium, subscription, setNotification) => {
@@ -99,9 +99,12 @@ export const updateUser = async (userId, isPremium, subscription, setNotificatio
 export const getUser = async (userId, setUserData) => {
   const userDoc = await getDoc(doc(db, 'users', userId));
   if (userDoc.exists()) {
-    setUserData(userDoc.data());
+    const userData = userDoc.data();
+    setUserData(userData);
+    return userData; // Return the data
   } else {
     console.error("User not found");
+    return null;
   }
 };
 
