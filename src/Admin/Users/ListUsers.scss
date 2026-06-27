@@ -1,11 +1,11 @@
-.list-users{
+.list-users {
     width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 10px 5px;
-    gap: 5px;
-
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 95px);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 16px;
+    padding: 24px 16px;
+    align-items: start;
 }

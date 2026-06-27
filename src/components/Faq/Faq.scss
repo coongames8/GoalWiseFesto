@@ -1,133 +1,124 @@
-.container{
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .accordion{
+.faq {
     width: 100%;
-    .accordion-item {
-      border-bottom: 1px solid #e5e5e5;
-      button {
-        position: relative;
-        display: block;
-        text-align: left;
-        width: 100%;
-        padding: 1.5em 0;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        font-size: clamp(22px, 3vw, 30px);
+        font-weight: 800;
+        color: var(--dark);
+    }
+
+    .subtitle {
+        font-size: 14px;
         color: var(--grey);
-        border: none;
-        background: none;
-        outline: none;
-        &:hover, &:focus {
-          cursor: pointer;
-          color: var(--blue);
-          &::after {
-            cursor: pointer;
-            color: var(--blue);
-            border: 1px solid var(--blue);
-          }
-        }
-    
-        &:hover, &:focus {
-          cursor: pointer;
-          color: var(--blue);
-          filter: brightness(90%); /* Darkens by 10% */
-          &::after{
-            color: var(--blue);
-            filter: brightness(90%); /* Darkens by 10% */
-            border: 1px solid var(--dark-blue);
-          }
-        }
-        
-        .accordion-title {
-          padding: 1em 1.5em 1em 0;
-        }
-    
-        .icon {
-          display: inline-block;
-          position: absolute;
-          top: 18px;
-          right: 0;
-          width: 22px;
-          height: 22px;
-          border: 1px solid;
-          border-radius: 22px;
-          &::before{
-              display: block;
-              position: absolute;
-              content: "";
-              top: 9px;
-              left: 5px;
-              width: 10px;
-              height: 2px;
-              background: currentColor;
-          }
-          &::after{
-              display: block;
-              position: absolute;
-              content: "";
-              top: 5px;
-              left: 9px;
-              width: 2px;
-              height: 10px;
-              background: currentColor;
+        margin-top: 4px;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+    .accordion {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .accordion-item {
+            background: var(--lite);
+            border: 1px solid var(--light-grey);
+            border-radius: var(--r-md);
+            overflow: hidden;
+            transition: box-shadow var(--t-fast), border-color var(--t-fast);
+
+            &.open {
+                box-shadow: var(--shadow-sm);
+                border-color: var(--blue);
+            }
+
+            .accordion-button {
+                position: relative;
+                display: flex;
+                width: 100%;
+                padding: 16px 48px 16px 18px;
+                color: var(--dark);
+                border: none;
+                background: none;
+                outline: none;
+                cursor: pointer;
+                text-align: left;
+                font-size: 15px;
+                font-weight: 600;
+                transition: color var(--t-fast);
+
+                &:hover {
+                    color: var(--blue);
+                }
+
+                .accordion-title {
+                    flex: 1;
+                }
+
+                .icon {
+                    position: absolute;
+                    top: 50%;
+                    right: 16px;
+                    transform: translateY(-50%);
+                    width: 20px;
+                    height: 20px;
+                    transition: transform var(--t-fast);
+
+                    &::before,
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        background: currentColor;
+                        border-radius: 2px;
+                    }
+
+                    &::before {
+                        top: 9px;
+                        left: 4px;
+                        width: 12px;
+                        height: 2px;
+                    }
+
+                    &::after {
+                        top: 4px;
+                        left: 9px;
+                        width: 2px;
+                        height: 12px;
+                        transition: transform var(--t-fast);
+                    }
+
+                    &.rotated::after {
+                        transform: rotate(90deg);
+                        opacity: 0;
+                    }
+                }
+            }
+
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--t), padding var(--t);
+                padding: 0 18px;
+
+                p {
+                    margin: 0 0 16px;
+                    font-size: 14px;
+                    color: var(--dark-grey);
+                    line-height: 1.6;
+                }
+            }
+
+            &.open .accordion-content {
+                max-height: 400px;
+                padding-bottom: 4px;
             }
         }
-    
-        .icon {
-          transition: transform 200ms ease-in-out;
-        
-          &::after {
-            transition: transform 200ms ease-in-out;
-          }
-        }
-        
-        &[aria-expanded=true] .icon {
-          transform: rotate(45deg);
-        }
-      }
-    
-      .accordion-content {
-        opacity: 0;
-        max-height: 0;
-        overflow: hidden;
-        //transition: opacity 200ms linear, max-height 200ms linear;
-        transition: max-height 300ms ease-in-out, opacity 300ms ease-in-out;
-    
-        will-change: opacity, max-height;
-        p{
-          margin: 1em 0;
-        }
-    
-        background: linear-gradient(to bottom, var(--transparent), var(--lite),  var(--transparent),  var(--light-blue));
-      }
-      
-      &[aria-expanded=true]{
-        button {
-          color: var(--blue);
-          border-bottom: 1px solid var(--blue);
-          .icon::after{
-            width: 0;
-          }
-        }
-    
-        .accordion-content {
-          opacity: 1;
-          max-height: max-content; /* Adjust as needed */
-          //transition: all 200ms linear;
-          transition: max-height 300ms ease-in-out, opacity 300ms ease-in-out;
-          will-change: opacity, max-height;
-        }
-      }
-      
-          
-      button[aria-expanded=true] + .accordion-content {
-        opacity: 1;
-        max-height: max-content;
-        transition: all 200ms linear;
-        will-change: opacity, max-height;
-      }
     }
-  }
 }

@@ -1,32 +1,61 @@
-.flyer{
+.flyer {
     width: 100%;
-    background: var(--light-blue);
-    padding: 5px 5px;
+    padding: 48px 16px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    align-items: flex-end;
-    gap: 5px;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--deep-green) 100%);
+    position: relative;
+    overflow: hidden;
 
-    background: linear-gradient(to bottom, var(--lite), var(--light-blue));
-
-    h1{
-      &:first-of-type{
-        font-size: 17px;
-        color: var(--dark-blue);
-      }
-
-      &:last-of-type{
-        color: var(--lite);
-        font-size: 15px;
-        color: var(--grey);
-      }
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(208, 255, 196, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
     }
 
-    .btn:hover {
-      background: var(--lite);
-      color: var(--grey);
+    .content {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
 
+        h1 {
+            color: var(--lite);
+            font-size: clamp(22px, 3.5vw, 32px);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        .btn {
+            margin-top: 8px;
+            background: var(--lite);
+            color: var(--dark-blue);
+            font-weight: 700;
+            padding: 12px 28px;
+
+            &:hover {
+                background: var(--light-blue);
+                color: var(--dark-blue);
+                transform: translateY(-2px);
+            }
+        }
     }
 }

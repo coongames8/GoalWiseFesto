@@ -1,86 +1,89 @@
-.card {
-    width: 320px;
-    min-height: 200px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
+.user-card {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    background: var(--lite);
+    border: 1px solid var(--light-grey);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-sm);
     text-decoration: none;
-    flex-wrap: wrap;
+    overflow: hidden;
+    transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
 
-    @media screen and (max-width: 448px){
-      &{
-        width: 100%;
-      }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--blue);
     }
-  
-    .cover-bg {
-      height: 80px;
-      border-radius: 5px 5px 0 0;
-      background-size: contain;
-      background-position: center;
-    }
-  
-    .user-info-wrap {
-      display: flex;
-      padding: 0 5px;
-      margin-top: -35px;
-  
-      .user-photo {
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        border: 2px solid #fff;
-        object-fit: fill;
-        object-position: center;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-      }
-  
-      .user-info {
-        padding-left: 10px;
-        padding-top: 5px;
-        flex-wrap: wrap;
-        
-  
-        .user-name {
-          font-size: 20px;
-          font-weight: 400;
-          color: var(--lite);
-          word-wrap: break-word; /* Break long words */
-          word-break: break-word; /* Break long words for compatibility */
+
+    &.premium {
+        border-color: var(--yellow);
+        .card-header {
+            background: linear-gradient(135deg, var(--yellow), var(--dark-yellow));
         }
-  
-        .user-title {
-          font-size: 16px;
-          font-weight: 200;
-          color: var(--grey);
-          margin-top: 10px;
-          text-overflow: ellipsis;
-          width: 100%;
-          word-wrap: break-word; /* Break long words */
-          word-break: break-word; /* Break long words for compatibility */
-        }
-      }
     }
-    .user-bio {
-      padding: 10px 5px;
-      gap: 10px;
-      >*{
-        font-size: 16px;
-        color: var(--grey);
-        margin-top: 10px;
+
+    .card-header {
+        padding: 14px 18px;
+        background: linear-gradient(135deg, var(--dark-blue), var(--deep-green));
         display: flex;
         align-items: center;
-        justify-content: start;
-        width: 100%;
-        word-wrap: break-word; /* Break long words */
-        word-break: break-word; /* Break long words for compatibility */
-      }
 
-      .mail{
-        font-size: 18px;
-        margin: 0 10px;
-      }
+        .plan-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--lite);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+
+            .badge-icon {
+                font-size: 16px;
+                color: var(--light-blue);
+            }
+        }
     }
-  }
-  
+
+    .card-body {
+        padding: 16px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .username {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+            word-break: break-word;
+        }
+
+        .email {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--grey);
+            word-break: break-word;
+
+            .mail {
+                font-size: 16px;
+                color: var(--blue);
+                flex-shrink: 0;
+            }
+        }
+
+        .sub-date {
+            font-size: 12px;
+            color: var(--grey);
+            padding-top: 6px;
+            border-top: 1px solid var(--mist);
+            margin-top: 4px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        max-width: 100%;
+    }
+}

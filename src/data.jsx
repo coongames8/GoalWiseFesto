@@ -1,7 +1,7 @@
 import { IoLogoFacebook, IoLogoInstagram, IoLogoWhatsapp } from "react-icons/io5";
-import Image1 from './assets/10.jpg';
-import Image2 from './assets/3.jpg';
-import Image3 from './assets/4.jpg';
+import Image1 from './assets/hero-1.svg';
+import Image2 from './assets/hero-2.svg';
+import Image3 from './assets/hero-3.svg';
 import { FaTelegram } from "react-icons/fa";
 import { PiXLogo } from "react-icons/pi";
 

@@ -1,134 +1,186 @@
 .pricing {
     width: 100%;
-    //background: var(--light-color);
-    position: relative;
+    padding: 40px 0;
+    background: linear-gradient(180deg, var(--lite) 0%, var(--cloud) 100%);
+
+    .head {
+        font-size: clamp(24px, 3.5vw, 32px);
+        font-weight: 800;
+        color: var(--dark);
+        letter-spacing: 0.5px;
+    }
+
+    .subhead {
+        font-size: 14px;
+        color: var(--grey);
+        text-align: center;
+        margin-top: 4px;
+        margin-bottom: 24px;
+    }
 
     .pricing-header {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
+        margin-bottom: 28px;
 
-        .plans-switch-container {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .plans-options {
+            display: inline-flex;
+            background: var(--mist);
+            border: 1px solid var(--light-grey);
+            border-radius: var(--r-pill);
+            padding: 4px;
+            gap: 2px;
 
-            .plans-options {
-                min-width: 300px;
+            input[type='radio'] {
+                display: none;
+            }
+
+            label {
+                color: var(--dark-grey);
+                padding: 8px 20px;
+                border-radius: var(--r-pill);
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 600;
+                transition: all var(--t-fast);
+
+                &:hover {
+                    color: var(--dark-blue);
+                }
+            }
+
+            label:has(input[type='radio']:checked) {
                 background: var(--dark-blue);
-                border-radius: 30px;
-                display: flex;
-                gap: 10px;
-                padding: 6px;
-                align-items: center;
-                justify-content: space-evenly;
-
-                input[type="radio"] {
-                    display: none;
-                }
-
-                label {
-                    color: #fff;
-                    padding: 8px 16px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    transition: background 0.3s;
-
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.1);
-                    }
-                }
-
-                label:has(input[type="radio"]:checked) {
-                    background: var(--green);
-                    font-weight: bold;
-                }
+                color: var(--lite);
+                box-shadow: var(--shadow-sm);
             }
         }
     }
 
     .wrapper {
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: 20px;
+        align-items: stretch;
 
-        >div {
-            width: calc((100% - 100px)/ 3);
-            min-width: 300px;
-            height: inherit;
-            box-shadow: var(--shadow);
+        .plan-card {
+            --accent: var(--blue);
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-direction: column;
-            padding: 10px 20px;
+            padding: 28px 24px;
+            background: var(--lite);
+            border: 1px solid var(--light-grey);
+            border-top: 4px solid var(--accent);
+            border-radius: var(--r-lg);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
             position: relative;
-            background: linear-gradient(to bottom, var(--lite), var(--light-blue));
-
-            //background: var(--light-color);
-            position: relative;
-            border-radius: 10px;
             overflow: hidden;
 
-            h1 {
-                color: var(--dark-blue);
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: var(--shadow-lg);
             }
 
+            .plan-header {
+                margin-bottom: 20px;
 
-            h2 {
-                span {
-                    font-weight: bolder;
+                .plan-name {
+                    font-size: 14px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: var(--accent);
+                    margin-bottom: 8px;
+                }
+
+                .price {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 4px;
+                    margin-bottom: 8px;
+
+                    .amount {
+                        font-size: 32px;
+                        font-weight: 800;
+                        color: var(--dark);
+                    }
+
+                    .period {
+                        font-size: 14px;
+                        color: var(--grey);
+                    }
+                }
+
+                .plan-title {
+                    font-size: 13px;
+                    color: var(--grey);
+                    line-height: 1.5;
                 }
             }
 
-            ul {
+            .features {
                 width: 100%;
-                list-style-type: circle;
-                //padding-left: 10px;
-                list-style-position: inside;
-                list-style-image: url('https://i.postimg.cc/R00sKW5z/bi-check-circle-fill.png');
-                line-height: 2em;
+                list-style: none;
+                margin-bottom: 24px;
+                flex: 1;
+
+                li {
+                    position: relative;
+                    padding: 8px 0 8px 28px;
+                    font-size: 14px;
+                    color: var(--dark);
+                    line-height: 1.5;
+                    border-bottom: 1px solid var(--mist);
+
+                    &::before {
+                        content: '✓';
+                        position: absolute;
+                        left: 0;
+                        top: 8px;
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 50%;
+                        background: var(--accent);
+                        color: var(--lite);
+                        font-size: 11px;
+                        font-weight: 700;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
             }
 
-            img.table-bg {
-                max-width: 100%;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
+            .btn {
                 width: 100%;
-                object-fit: contain;
-                object-position: center;
-            }
+                background: var(--accent);
+                color: var(--lite);
+                padding: 12px;
+                justify-content: center;
+                font-weight: 700;
 
-            >.btn {
-                z-index: 2;
-                width: 100%;
-                //padding: 8px 60px;
-                //text-transform: uppercase;
+                &:hover {
+                    background: var(--dark-blue);
+                    color: var(--lite);
+                }
             }
         }
     }
 }
 
 @media screen and (max-width: 660px) {
-    .pricing-header {
-        display: flex;
-        flex-wrap: wrap;
-
-        h2 {
-            text-align: center;
-        }
-
-        .plans-switch-container {
-            align-items: center;
-            justify-content: center;
+    .pricing {
+        .pricing-header {
+            .plans-options {
+                label {
+                    padding: 7px 14px;
+                    font-size: 12px;
+                }
+            }
         }
     }
 }

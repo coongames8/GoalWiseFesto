@@ -1,53 +1,95 @@
-.newsletter{
+.newsletter {
     width: 100%;
-    height: 150px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
 
-    
-    background: linear-gradient(to bottom, var(--lite), var(--transparent),  var(--light-blue));
+    h3 {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--dark);
+    }
 
-    form{
+    p {
+        font-size: 14px;
+        color: var(--grey);
+        margin-bottom: 12px;
+    }
+
+    form {
         width: 100%;
-        max-width: 340px;
-        height: 40px;
+        max-width: 440px;
+        height: 48px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 8px;
+        background: var(--lite);
+        border: 1px solid var(--light-grey);
+        border-radius: var(--r-pill);
+        padding: 4px 4px 4px 16px;
+        box-shadow: var(--shadow-sm);
 
-        input{
-            height: inherit;
+        input {
+            flex: 1;
+            height: 100%;
             outline: none;
-            font-size: 16px;
-            padding: 0 5px;
-            background: var(--lite);
+            font-size: 14px;
             color: var(--dark);
-            flex: 6;
             border: none;
-            background: var(--light-blue);
+            background: transparent;
 
-
-            border: 1px solid #9FA4A8;
+            &::placeholder {
+                color: var(--grey);
+            }
         }
-        
-        button{
-            flex: 3;
+
+        button {
+            flex: 0 0 auto;
             height: 40px;
+            padding: 0 22px;
             border: none;
-            border: 1px solid var(--blue);
+            border-radius: var(--r-pill);
             color: var(--lite);
             background: var(--blue);
             cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: background var(--t-fast), transform var(--t-fast);
 
-            &:hover{
-                background: var(--dark);
-                color: var(--blue);
+            &:hover {
+                background: var(--dark-blue);
+                transform: translateY(-1px);
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        form {
+            flex-direction: column;
+            height: auto;
+            border-radius: var(--r-lg);
+            padding: 12px;
+            gap: 10px;
+
+            input {
+                width: 100%;
+                height: 44px;
+                padding: 0 14px;
+                background: var(--cloud);
+                border-radius: var(--r-pill);
             }
 
-
-
+            button {
+                width: 100%;
+                height: 44px;
+            }
         }
     }
 }

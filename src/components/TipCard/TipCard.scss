@@ -1,140 +1,194 @@
 .tip-card {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: .3%;
-    background: var(--transparent);
-    max-width: 650px;
     width: 100%;
-    //min-height: 100px;
-    cursor: default;
-    height: fit-content;
-    position: relative; // required to position the tag absolutely inside
+    max-width: 520px;
+    min-height: 92px;
+    padding: 12px 14px;
+    background: var(--lite);
+    border-radius: var(--r-md);
+    border: 1px solid var(--light-grey);
+    border-left: 3px solid var(--light-grey);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--t-fast), transform var(--t-fast), border-color var(--t-fast);
+    position: relative;
+
+    &:hover {
+        box-shadow: var(--shadow);
+        transform: translateY(-1px);
+    }
+
+    &.premium {
+        border-left-color: var(--yellow);
+        background: linear-gradient(180deg, #fffdf5 0%, var(--lite) 60%);
+    }
+
+    &.free {
+        border-left-color: var(--accent-green);
+    }
 
     .top {
         width: 100%;
         display: flex;
-        flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        //padding: 5px;
-    }
+        gap: 8px;
+        margin-bottom: 8px;
 
-    .tag {
-        width: fit-content;
-        color: black;
-        font-weight: bold;
-        font-size: 12px;
-        padding: 2px 2px;
-        border-radius: 100%;
-        //box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        z-index: 2;
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-
-}
-
-
-
-.center {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: .5rem;
-
-    //margin-top: 30px;
-    .teams {
-        display: flex;
-        //width: 100%;
-        flex: 1;
-        gap: 5px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-
-        p {
-            width: 100%;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            flex: 1;
-
-            overflow: hidden;
-            /* Hide overflow content */
-            display: -webkit-box;
-            /* Use the flexbox model for a multi-line block */
-            -webkit-line-clamp: 2;
-            /* Show only 3 lines of text */
-            -webkit-box-orient: vertical;
-            /* Set the box to be vertical */
-            text-overflow: ellipsis;
-
-            /* Add these two lines 👇 */
-            word-break: break-word;
-            overflow-wrap: break-word;
-
-            &:first-child {
-                text-align: end;
-            }
+        .odd {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--dark-blue);
+            background: var(--light-blue);
+            padding: 3px 8px;
+            border-radius: var(--r-pill);
         }
 
-        .results {
-            width: 50px;
-            background: var(--dark-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .tag {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            padding: 3px 8px;
+            border-radius: var(--r-pill);
             color: var(--lite);
         }
 
-        .name.hidden {
-            color: transparent;
-            text-shadow: 0 0 5px rgba(0, 0, 0, .2)
+        .premium & .tag {
+            background: linear-gradient(135deg, var(--yellow), var(--dark-yellow));
+        }
+
+        .free & .tag {
+            background: var(--accent-green);
+        }
+
+        .edit {
+            color: var(--grey);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: color var(--t-fast);
+
+            &:hover {
+                color: var(--blue);
+            }
         }
     }
 
-    .info {
-        color: var(--grey);
-        display: flex;
-        flex-wrap: wrap;
-        height: 100%;
-        flex-direction: column;
+    .center {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
         align-items: center;
-        justify-content: space-evenly;
-        padding: 3px 0 0 3px;
+        gap: 10px;
 
-        p {
+        .time {
             display: flex;
             align-items: center;
-            font-size: 13px;
-            margin-bottom: auto;
-            flex: 1;
+            justify-content: center;
+            padding: 4px 8px;
+            background: var(--mist);
+            border-radius: var(--r-sm);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--dark-grey);
+            min-width: 52px;
+        }
 
-            span {
-                font-weight: 800;
+        .teams {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+
+            .name {
+                flex: 1;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--dark);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+
+                &:first-child {
+                    text-align: end;
+                }
+
+                &.hidden {
+                    color: transparent;
+                    text-shadow: 0 0 6px rgba(31, 45, 39, 0.25);
+                    letter-spacing: 1px;
+                }
+            }
+
+            .pick {
+                flex: 0 0 auto;
+                min-width: 44px;
+                padding: 4px 8px;
+                background: var(--dark-blue);
+                color: var(--lite);
+                font-size: 12px;
+                font-weight: 700;
+                border-radius: var(--r-sm);
+                text-align: center;
+                white-space: nowrap;
+            }
+        }
+
+        .meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+            min-width: 48px;
+
+            .result {
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--grey);
+            }
+
+            .status {
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+                padding: 2px 6px;
+                border-radius: var(--r-pill);
 
                 &.won {
                     color: var(--blue);
+                    background: var(--light-green);
                 }
 
                 &.lost {
                     color: var(--red);
+                    background: var(--light-red);
                 }
 
                 &.pending {
-                    color: var(--dark-green);
+                    color: var(--dark-yellow);
+                    background: var(--light-yellow);
                 }
             }
+        }
+    }
+}
 
+@media (max-width: 480px) {
+    .tip-card {
+        .center {
+            grid-template-columns: auto 1fr auto;
+            gap: 6px;
+
+            .teams .name {
+                font-size: 12px;
+            }
+
+            .time {
+                min-width: 44px;
+                font-size: 11px;
+            }
         }
     }
 }
