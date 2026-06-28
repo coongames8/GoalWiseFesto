@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -226,3 +226,23 @@ export const getTips = async (setTips, setLoading, currentDate) => {
     setLoading(false);
   })
 };
+
+export const resetPassword = async (email, setNotification) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    setNotification({
+      isVisible: true,
+      type: 'success',
+      message: "Password reset link sent. Check your inbox.",
+    });
+    return true;
+  } catch (error) {
+    setNotification({
+      isVisible: true,
+      type: 'error',
+      message: error.message || "Failed to send reset link.",
+    });
+    return false;
+  }
+};
+

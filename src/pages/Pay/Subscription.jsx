@@ -1,79 +1,93 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Pay.scss';
 import { useEffect, useState } from 'react';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
 import Loader from '../../components/Loader/Loader';
-import { useNavigate } from 'react-router-dom';
 import { pricings } from '../../data';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { notificationState, subscriptionState, userState } from '../../recoil/atoms';
 import { PaystackButton } from 'react-paystack';
 import { getUser, updateUser } from '../../firebase';
-
+import { useCurrency } from '../../context/CurrencyContext';
 
 export default function Subscription() {
-  const [user, setUser] = useRecoilState(userState);
-  const [loading, setLoading] = useState(false);
-  const location = useLocation();
-  const [data, setData] = useState(null);
-  const setNotification = useSetRecoilState(notificationState);
-  const [subscription, setSubscription] = useRecoilState(subscriptionState);
-  const navigate = useNavigate();
+    const [user, setUser] = useRecoilState(userState);
+    const [loading, setLoading] = useState(false);
+    const location = useLocation();
+    const [data, setData] = useState(null);
+    const setNotification = useSetRecoilState(notificationState);
+    const [subscription, setSubscription] = useRecoilState(subscriptionState);
+    const navigate = useNavigate();
+    const { symbol, convertPrice } = useCurrency();
 
-  useEffect(() => {
-    if (location.state) {
-      setData(location.state.subscription)
-      setSubscription(location.state.subscription)
-    } else {
-      setData(pricings[0])
-      setSubscription(pricings[0])
-    }
-  }, [location]);
+    useEffect(() => {
+        if (location.state && location.state.subscription) {
+            const sub = location.state.subscription;
+            setData({
+                ...sub,
+                price: sub.price != null ? sub.price : convertPrice(sub.price),
+                currency: sub.currency || symbol,
+            });
+            setSubscription(sub);
+        } else {
+            const fallback = { ...pricings[0], price: convertPrice(pricings[0].price), currency: symbol };
+            setData(fallback);
+            setSubscription(fallback);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location]);
 
-  const handleUpgrade = async () => {
-    const currentDate = new Date().toISOString();
-    await updateUser(user.email, true, {
-      subDate: currentDate,
-      billing: subscription.billing,
-      plan: subscription.plan,
-    }, setNotification).then(() => {
-      getUser(user.email, setUser);
-    }).then(() => {
-      navigate("/", { replace: true });
-    });
-  };
+    const handleUpgrade = async () => {
+        const currentDate = new Date().toISOString();
+        await updateUser(
+            user.email,
+            true,
+            {
+                subDate: currentDate,
+                billing: subscription.billing,
+                plan: subscription.plan,
+            },
+            setNotification
+        )
+            .then(() => getUser(user.email, setUser))
+            .then(() => navigate('/', { replace: true }));
+    };
 
-  const componentProps = {
-    reference: (new Date()).getTime().toString(),
-    email: user ? user.email : "coongames8@gmail.com",
-    amount: (data && data.price * 100) || (subscription.price * 100),
-    publicKey: 'pk_live_f36eadef9a97cb84ef23ebec889bfc4e458e3a4a',//pk_live_d0d5675da8738d0b7cc7485cbf74c5e1c505bb27
-    currency: "KES",
-    metadata: {
-      name: user ? user.email : "coongames8@gmail.com",
-    },
-    text: 'PAY NOW',
-    onSuccess: (response) => {
-      handleUpgrade();
-    },
-    onClose: () => {
-      //console.log('Payment dialog closed');
-      // Handle payment closure here
-    },
-  };
+    const amount = (data && data.price) || convertPrice(subscription.price);
+    const displaySymbol = data?.currency || symbol;
+    const payCurrency = displaySymbol === '₦' ? 'NGN' : 'KES';
 
-  return (
-    <div className='pay'>
-      <AppHelmet title={"Booking"} />
-      <ScrollToTop />
-      {
-        loading && <Loader />
-      }
+    const componentProps = {
+        reference: new Date().getTime().toString(),
+        email: user ? user.email : 'coongames8@gmail.com',
+        amount: amount * 100,
+        publicKey: 'pk_live_f36eadef9a97cb84ef23ebec889bfc4e458e3a4a',
+        currency: payCurrency,
+        metadata: {
+            name: user ? user.email : 'coongames8@gmail.com',
+        },
+        text: 'PAY NOW',
+        onSuccess: () => handleUpgrade(),
+        onClose: () => {},
+    };
 
-      {data && <h4>Payment Of KSH {data.price}</h4>}
-      {data && <h4>You Are About To Claim {data.plan} Plan.</h4>}
-      <PaystackButton {...componentProps} className='btn' />
-    </div>
-  )
+    return (
+        <div className="pay">
+            <AppHelmet title="Booking" />
+            <ScrollToTop />
+            {loading && <Loader />}
+            {data && (
+                <div className="pay-card">
+                    <h2>Complete your subscription</h2>
+                    <span className="plan">{data.plan} Plan</span>
+                    <div className="amount">
+                        {displaySymbol} {data.price.toLocaleString()}
+                    </div>
+                    <h4>Billing: {data.billing}</h4>
+                    <PaystackButton {...componentProps} className="btn" />
+                </div>
+            )}
+        </div>
+    );
 }

@@ -2,6 +2,7 @@ import './Pricing.scss';
 import { NavLink, useLocation } from 'react-router-dom';
 import { pricings } from '../../data';
 import { useState } from 'react';
+import { useCurrency } from '../../context/CurrencyContext';
 
 const BILLING_OPTIONS = [
     { value: 'Day', label: 'Daily' },
@@ -12,6 +13,7 @@ const BILLING_OPTIONS = [
 export default function Pricing() {
     const [billing, setBilling] = useState('Day');
     const location = useLocation();
+    const { symbol, convertPrice } = useCurrency();
 
     return (
         <div className="pricing" id="pricing">
@@ -39,30 +41,42 @@ export default function Pricing() {
                 <div className="wrapper">
                     {pricings
                         .filter((item) => item.billing === billing)
-                        .map((pricing) => (
-                            <div className="plan-card" key={pricing.id} style={{ '--accent': pricing.color }}>
-                                <div className="plan-header">
-                                    <h2 className="plan-name">{pricing.plan}</h2>
-                                    <div className="price">
-                                        <span className="amount">KSH {pricing.price}</span>
-                                        <span className="period">/{pricing.billing}</span>
+                        .map((pricing) => {
+                            const converted = convertPrice(pricing.price);
+                            return (
+                                <div className="plan-card" key={pricing.id} style={{ '--accent': pricing.color }}>
+                                    <div className="plan-header">
+                                        <h2 className="plan-name">{pricing.plan}</h2>
+                                        <div className="price">
+                                            <span className="amount">
+                                                {symbol} {converted.toLocaleString()}
+                                            </span>
+                                            <span className="period">/{pricing.billing}</span>
+                                        </div>
+                                        <p className="plan-title">{pricing.title}</p>
                                     </div>
-                                    <p className="plan-title">{pricing.title}</p>
+                                    <ul className="features">
+                                        {pricing.features.map((feature) => (
+                                            <li key={feature.split(' ').join('_')}>{feature}</li>
+                                        ))}
+                                    </ul>
+                                    <NavLink
+                                        className="btn"
+                                        state={{
+                                            from: location,
+                                            subscription: {
+                                                ...pricing,
+                                                price: converted,
+                                                currency: symbol,
+                                            },
+                                        }}
+                                        to="/subscribe"
+                                    >
+                                        Subscribe now
+                                    </NavLink>
                                 </div>
-                                <ul className="features">
-                                    {pricing.features.map((feature) => (
-                                        <li key={feature.split(' ').join('_')}>{feature}</li>
-                                    ))}
-                                </ul>
-                                <NavLink
-                                    className="btn"
-                                    state={{ from: location, subscription: pricing }}
-                                    to="/subscribe"
-                                >
-                                    Subscribe now
-                                </NavLink>
-                            </div>
-                        ))}
+                            );
+                        })}
                 </div>
             </div>
         </div>
