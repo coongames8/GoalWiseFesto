@@ -16,8 +16,8 @@ const GAME_TYPES = [
   { value: 'ALL', label: 'All Games' },
   { value: '1X2', label: 'WDW (1X2)' },
   { value: 'CS', label: 'Goals (CS)' },
-  { value: 'GG', label: 'BTTS (GG/NG)' },
-  { value: 'OV_UN', label: 'TOTAL (OV/UN)' },
+  { value: 'GG', label: 'GG/NG' },
+  { value: 'OV_UN', label: 'OV/UN' },
 ];
 
 const SLOT_LABELS = {
@@ -200,7 +200,7 @@ export default function Tips() {
         </div>
       </div>
 
-      <NavLink to="#pricing" className="subscribe-btn">
+      <NavLink to="pricing" className="subscribe-btn">
         Subscribe to view all tips
       </NavLink>
 

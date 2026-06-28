@@ -23,7 +23,7 @@ export const signInUser = async (email, password, setNotification, navigate) => 
       type: 'success',
       message: "Welcome Back!",
     });
-    navigate('/'); // Add redirect
+    navigate("/"); // Add redirect
   }).catch(async (error) => {
     const errorMessage = await error.message;
     setNotification({
@@ -57,7 +57,7 @@ export const registerUser = async (username, email, password, setNotification, n
         type: 'success',
         message: `User with ${user.email} has been registered successfully`,
       });
-      navigate('/'); // Add redirect here
+      navigate('/login'); // Add redirect here
     }).catch(async (error) => {
       const errorMessage = await error.message;
       setNotification({
@@ -103,7 +103,6 @@ export const getUser = async (userId, setUserData) => {
     setUserData(userData);
     return userData; // Return the data
   } else {
-    console.error("User not found");
     return null;
   }
 };

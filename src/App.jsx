@@ -12,6 +12,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
 import Home from './pages/Home/Home';
+import Pricing from './components/Pricing/Pricing';
 import About from './pages/About/About';
 import { Login } from './pages/Auth/Login';
 import { Register } from './pages/Auth/Register';
@@ -73,6 +74,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="subscribe" element={<ProtectedRoute><KoraPayments /></ProtectedRoute>} />
+            <Route path="pricing" element={<Pricing />} />
             <Route path="about" element={<About />} />
             <Route path="login" element={<ProtectedAuthRoute><Login /></ProtectedAuthRoute>} />
             <Route path="register" element={<ProtectedAuthRoute><Register /></ProtectedAuthRoute>} />

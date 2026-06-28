@@ -31,7 +31,7 @@ const UserCard = ({ user }) => {
             <div className="card-header">
                 <span className="plan-badge">
                     {user.isPremium && <MdStars className="badge-icon" />}
-                    {user.subscription || 'Free'} Plan
+                    {user.subscription?.billing|| 'Free'} Plan
                 </span>
             </div>
             <div className="card-body">
@@ -40,8 +40,8 @@ const UserCard = ({ user }) => {
                     <MdOutlineEmail className="mail" />
                     <span>{user.email}</span>
                 </div>
-                {user.subDate && (
-                    <div className="sub-date">Subscribed {formatDate(user.subDate)}</div>
+                {user.subscription && user.subscription.subDate && (
+                    <div className="sub-date">Subscribed {formatDate(user.subscription.subDate)}</div>
                 )}
             </div>
         </NavLink>

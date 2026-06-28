@@ -12,19 +12,19 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const setNotification = useSetRecoilState(notificationState);
     const navigate = useNavigate();
-
+  
     const handleLogin = (e) => {
-        e.preventDefault();
-        if (email && password) {
-            signInUser(email, password, setNotification, navigate);
-        } else {
-            setNotification({
-                isVisible: true,
-                type: 'warning',
-                message: 'Please enter both email and password.',
-            });
-        }
-    };
+      e.preventDefault();
+      if(email && password) {
+        signInUser(email, password, setNotification, navigate); // Pass navigate
+      } else {
+        setNotification({
+          isVisible: true,
+          type: 'warning',
+          message: "You have entered an invalid email address!",
+        });
+      };
+    }
 
     return (
         <div className="auth">

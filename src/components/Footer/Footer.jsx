@@ -37,6 +37,7 @@ const Footer = () => {
                     <h3>Quick Links</h3>
                     <div className="links">
                         <NavLink to="/" state={{ from: location }}>Home</NavLink>
+                        <NavLink to="/pricing" state={{ from: location }}>Pricing</NavLink>
                         <NavLink to="/login" state={{ from: location }}>Sign In</NavLink>
                         <NavLink to="/register" state={{ from: location }}>Get Started</NavLink>
                         <NavLink to="/about" state={{ from: location }}>About Us</NavLink>

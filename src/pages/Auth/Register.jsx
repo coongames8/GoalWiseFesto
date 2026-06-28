@@ -14,18 +14,18 @@ export const Register = () => {
     const setNotification = useSetRecoilState(notificationState);
     const navigate = useNavigate();
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         if (email && password) {
-            registerUser(username, email, password, setNotification, navigate);
+          registerUser(username, email, password, setNotification, navigate); // Pass navigate
         } else {
-            setNotification({
-                isVisible: true,
-                type: 'warning',
-                message: 'Please fill in all fields.',
-            });
-        }
-    };
+          setNotification({
+            isVisible: true,
+            type: 'warning',
+            message: "You have entered an invalid email address!",
+          });
+        };
+    }
 
     return (
         <div className="auth">

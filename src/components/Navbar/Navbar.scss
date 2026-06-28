@@ -120,6 +120,7 @@ header {
             opacity: 0;
             pointer-events: none;
             transition: clip-path var(--t), opacity var(--t);
+            height: fit-content;
 
             &.active {
                 clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);

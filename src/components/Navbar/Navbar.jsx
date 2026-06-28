@@ -40,9 +40,14 @@ const Navbar = () => {
             <nav className={opened ? 'active' : ''}>
                 <div className="btn-container">
                     {user ? (
-                        <span className="btn ghost" onClick={handleLogout}>
-                            Logout
-                        </span>
+                        <>
+                            <span className="btn ghost" onClick={handleLogout}>
+                                Logout
+                            </span>
+                            <NavLink className="btn" to="pricing" onClick={closeMenu} state={{ from: location }}>
+                                Pricing
+                            </NavLink>
+                        </>
                     ) : (
                         <>
                             <NavLink className="btn ghost" to="login" onClick={closeMenu} state={{ from: location }}>
