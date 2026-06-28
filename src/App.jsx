@@ -28,6 +28,7 @@ import { checkSubscriptionStatus } from './utils/subscription';
 import KoraPayments from './pages/Pay/KoraPayments';
 import Notification from './components/Notification/Notification';
 import InstallPrompt from './components/InstallPrompt/InstallPrompt';
+import NotificationPrompt from './components/NotificationPrompt/NotificationPrompt';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -73,6 +74,7 @@ function App() {
           <Navbar />
           <Notification />
           <InstallPrompt />
+          <NotificationPrompt />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="subscribe" element={<ProtectedRoute><KoraPayments /></ProtectedRoute>} />

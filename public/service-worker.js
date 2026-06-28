@@ -68,34 +68,49 @@ self.addEventListener('fetch', (event) => {
 });
 
 
-// Notification click handler (optional)
+// Notification click handler
 self.addEventListener('notificationclick', (event) => {
-    event.notification.close(); // Close the notification
+    event.notification.close();
+    const targetUrl = (event.notification.data && event.notification.data.url) || '/';
     event.waitUntil(
-        self.clients.matchAll({ type: 'window' }).then((clientList) => {
-            // Check if the app is already open in a window
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
             for (let client of clientList) {
-                if (client.url === '/' && 'focus' in client) {
-                    return client.focus();
+                if ('focus' in client) {
+                    client.navigate(targetUrl).then(() => client.focus());
+                    return;
                 }
             }
-            // If not open, open a new window
             if (self.clients.openWindow) {
-                return self.clients.openWindow('/');
+                return self.clients.openWindow(targetUrl);
             }
         })
     );
 });
 
-// Push event handler (optional for push notifications)
+// Push event handler
 self.addEventListener('push', (event) => {
-    const data = event.data ? event.data.text() : 'Default notification content';
+    let payload = { title: 'GOAL WISE', body: 'New tips available!' };
+    try {
+        if (event.data) {
+            const parsed = event.data.json();
+            if (parsed && typeof parsed === 'object') {
+                payload = { ...payload, ...parsed };
+            } else {
+                payload.body = event.data.text();
+            }
+        }
+    } catch (e) {
+        payload.body = event.data ? event.data.text() : payload.body;
+    }
+
     const options = {
-        body: data,
+        body: payload.body,
         icon: '/logo.svg',
-        badge: '/favicon.svg'
+        badge: '/favicon.svg',
+        data: { url: payload.url || '/' },
+        vibrate: [80, 40, 80],
     };
     event.waitUntil(
-        self.registration.showNotification('GOAL WISE', options)
+        self.registration.showNotification(payload.title, options)
     );
 });
