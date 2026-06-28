@@ -1,9 +1,10 @@
-const CACHE_NAME = 'goal-genius-cache';
+const CACHE_NAME = 'goal-wise-cache-v2';
 const urlsToCache = [
     '/',
     '/index.html',
     '/manifest.json',
-    '*'
+    '/logo.svg',
+    '/favicon.svg'
 ];
 
 
@@ -91,8 +92,8 @@ self.addEventListener('push', (event) => {
     const data = event.data ? event.data.text() : 'Default notification content';
     const options = {
         body: data,
-        icon: '/logo512.png',
-        badge: '/logo128.png'
+        icon: '/logo.svg',
+        badge: '/favicon.svg'
     };
     event.waitUntil(
         self.registration.showNotification('GOAL WISE', options)

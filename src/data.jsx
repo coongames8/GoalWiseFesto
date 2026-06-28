@@ -1,7 +1,4 @@
 import { IoLogoFacebook, IoLogoInstagram, IoLogoWhatsapp } from "react-icons/io5";
-import Image1 from './assets/hero-1.svg';
-import Image2 from './assets/hero-2.svg';
-import Image3 from './assets/hero-3.svg';
 import { FaTelegram } from "react-icons/fa";
 import { PiXLogo } from "react-icons/pi";
 
@@ -121,27 +118,6 @@ export const socialUrls = [
   { id: 4, icon: <PiXLogo />, url: "https://x.com/goalgeniusvip", title: "X(Twitter)" },
   { id: 5, icon: <IoLogoInstagram />, url: "https://instagram.com/goalgenius.vip", title: "Instagram" },
 ];
-
-export const slides = [
-  {
-    id: 1,
-    img: Image1,
-    title: "Expert Football Predictions for Major Leagues",
-    link: "/tips"
-  },
-  {
-    id: 2,
-    img: Image2,
-    title: "Subscribe To Detailed and Real-Time Match Predictions and Insights",
-    link: "/pricing"
-  },
-  {
-    id: 3,
-    img: Image3,
-    title: "Stay Updated with the Latest Football News and Trends",
-    link: "/news"
-  },
-]
 
 export const testimonials = [
   {

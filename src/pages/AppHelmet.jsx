@@ -1,49 +1,52 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
+const SITE_NAME = 'GOAL WISE';
+const DEFAULT_DESCRIPTION =
+    'Get expert football tips, VIP predictions, correct scores, live scores and betting odds for top leagues worldwide.';
+const DEFAULT_KEYWORDS =
+    'football tips, football predictions, VIP tips, correct score, live football scores, football betting odds, football results, soccer predictions, betting tips, league standings';
+
+const PAGE_META = {
+    '': { title: 'Expert Football Tips & VIP Predictions', description: DEFAULT_DESCRIPTION },
+    Login: { title: 'Login', description: 'Sign in to your GOAL WISE account to access VIP football tips and predictions.' },
+    Register: { title: 'Create Account', description: 'Register on GOAL WISE to unlock VIP football tips, predictions and expert analysis.' },
+    About: { title: 'About Us', description: 'Learn about GOAL WISE — your home for expert football predictions, VIP tips and real-time match insights.' },
+    Tips: { title: 'Today\'s Football Tips & Predictions', description: 'Browse today\'s football tips and VIP predictions across major leagues. Filter by game type and date.' },
+    Pricing: { title: 'Pricing Plans', description: 'Choose a GOAL WISE subscription plan — daily, weekly or monthly — for VIP football tips and predictions.' },
+    Subscribe: { title: 'Subscribe', description: 'Complete your subscription to unlock GOAL WISE VIP football tips and predictions.' },
+    'Add Tip': { title: 'Add Tip', description: 'Admin: add a new football tip to GOAL WISE.' },
+    'Edit Tip': { title: 'Edit Tip', description: 'Admin: update an existing football tip on GOAL WISE.' },
+    'Edit User': { title: 'Edit User', description: 'Admin: update a user subscription on GOAL WISE.' },
+    'All Users': { title: 'All Users', description: 'Admin: view all registered GOAL WISE users.' },
+    '404 Error': { title: 'Page Not Found', description: 'The page you are looking for does not exist.' },
+};
+
 export default function AppHelmet({ title }) {
-  const location = useLocation();
-  const canonicalUrl = `${window.location.origin}${location.pathname}`;
+    const location = useLocation();
+    const canonicalUrl = `${window.location.origin}${location.pathname}`;
+    const meta = PAGE_META[title] || { title: title || SITE_NAME, description: DEFAULT_DESCRIPTION };
+    const fullTitle = title ? `${meta.title} | ${SITE_NAME}` : `${SITE_NAME} — ${meta.title}`;
+    const origin = window.location.origin;
 
-  return (
-    <Helmet>
-      <meta charSet="UTF-8" />
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/logo32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/logo16.png" />
-      <link rel="apple-touch-icon" href="/logo192.png" />
-      <link rel="manifest" href="/manifest.json" crossorigin="anonymous" />
-      <link rel="shortcut icon" type="image/x-icon" href="/logo512.png" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-      <meta name="theme-color" content="#00BFFF" />
-      <meta
-        name="description"
-        content="Get all the latest ✓Fixed VIP Tips ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions, including the Premier League, Championship and across the world."
-      />
-      <meta name="keywords" content="Football Predictions, Betting Odds, Live Scores, Live Sports, Football Results, Football Fixtures, Football Today, Premier League, Championship, Super Sports, Laliga, Bundesliga, Serie A" />
-      <meta name="author" content="GOAL WISE" />
-      <link rel="canonical" href={canonicalUrl} />
+    return (
+        <Helmet>
+            <title>{fullTitle}</title>
+            <meta name="description" content={meta.description} />
+            <meta name="keywords" content={DEFAULT_KEYWORDS} />
+            <link rel="canonical" href={canonicalUrl} />
 
-      {/* Open Graph tags for social media */}
-      <meta property="og:title" content={title} />
-      <meta
-        property="og:description"
-        content="Get all the latest ✓Fixed VIP Tips ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions."
-      />
-      <meta property="og:image" content={`${window.location.origin}/logo512.png`} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:type" content="website" />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content={SITE_NAME} />
+            <meta property="og:title" content={fullTitle} />
+            <meta property="og:description" content={meta.description} />
+            <meta property="og:image" content={`${origin}/logo.svg`} />
+            <meta property="og:url" content={canonicalUrl} />
 
-      {/* Twitter tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta
-        name="twitter:description"
-        content="Get all the latest ✓Fixed VIP Tips ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions."
-      />
-      <meta name="twitter:image" content={`${window.location.origin}/logo512.png`} />
-
-      <title>{title} | GOAL WISE - Fixed VIP Football Tips & Predictions, Insights and News</title>
-    </Helmet>
-  );
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={fullTitle} />
+            <meta name="twitter:description" content={meta.description} />
+            <meta name="twitter:image" content={`${origin}/logo.svg`} />
+        </Helmet>
+    );
 }

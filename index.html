@@ -1,55 +1,56 @@
 <!doctype html>
 <html lang="en">
-<meta>
-<meta charset="UTF-8" />
-<link rel="icon" href="/favicon.ico" />
-<!--Include favicon links for multiple resolutions-->
-<link rel="icon" type="image/png" sizes="32x32" href="/logo32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/logo16.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A6847" />
+  <meta name="color-scheme" content="light" />
 
-<link rel="apple-touch-icon" href="/logo192.png" />
-<link rel="manifest" href="/manifest.json" crossorigin="anonymous" />
-<link rel="shortcut icon" type="image/x-icon" href="/logo512.png" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<meta name="theme-color" content="#1f4568">
-<meta name="background-color" content="#ebf4fc" />
-<meta name="description" content="Get expert football tips, accurate match predictions, live scores, and the latest betting odds. Stay updated with fixtures and results from top leagues worldwide" />
-<meta name="keywords" content="football tips, football predictions, live football scores, football betting odds, football results, football fixtures, football leagues, football betting, live football updates, soccer predictions, betting tips, live match scores, football match results, match schedules, football stats, football news, league standings, football competitions, soccer betting odds">
-<meta name="author" content="GOAL WISE">
-<link rel="canonical" href="/" />
+  <title>GOAL WISE — Expert Football Tips, VIP Predictions & Betting Odds</title>
+  <meta name="description" content="Get expert football tips, accurate match predictions, VIP correct scores, live scores, and the latest betting odds. Stay updated with fixtures and results from top leagues worldwide." />
+  <meta name="keywords" content="football tips, football predictions, VIP tips, correct score, live football scores, football betting odds, football results, football fixtures, soccer predictions, betting tips, league standings, football stats" />
+  <meta name="author" content="GOAL WISE" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://goalwise.onrender.com/" />
 
-<!-- Open Graph -->
-<meta property="og:title" content="GOAL WISE" />
-<meta property="og:description" content="Get all the latest ✓Fixed VIP Tips ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions." />
-<meta property="og:image" content="/logo512.png" />
-<meta property="og:url" content="https://goalwise.onrender.com/" />
-<meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="any" href="/logo.svg" />
+  <link rel="apple-touch-icon" href="/logo.svg" />
+  <link rel="manifest" href="/manifest.json" crossorigin="anonymous" />
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="GOAL WISE" />
-<meta name="twitter:description" content="Get all the latest ✓Fixed VIP Tips ✓Football Predictions, ✓Latest Football Betting Odds and livescores, results & fixtures for all leagues and competitions." />
-<meta name="twitter:image" content="/logo512.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="GOAL WISE" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
-<!-- iOS -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="GOAL WISE" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GOAL WISE" />
+  <meta property="og:title" content="GOAL WISE — Expert Football Tips & VIP Predictions" />
+  <meta property="og:description" content="Get all the latest VIP tips, football predictions, betting odds, livescores, results and fixtures for all leagues and competitions." />
+  <meta property="og:image" content="https://goalwise.onrender.com/logo.svg" />
+  <meta property="og:url" content="https://goalwise.onrender.com/" />
+  <meta property="og:locale" content="en_KE" />
 
-<!--Add icons for various Apple device sizes-->
-<link rel="apple-touch-icon" sizes="120x120" href="/logo120.png" />
-<link rel="apple-touch-icon" sizes="152x152" href="/logo152.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/logo180.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GOAL WISE — Expert Football Tips & VIP Predictions" />
+  <meta name="twitter:description" content="Get all the latest VIP tips, football predictions, betting odds, livescores, results and fixtures for all leagues and competitions." />
+  <meta name="twitter:image" content="https://goalwise.onrender.com/logo.svg" />
 
-<!--Control how search engines index your page-->
-<meta name="robots" content="index, follow" />
+  <link rel="alternate" href="https://goalwise.onrender.com/" hreflang="en" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<!--If your site supports multiple languages, add alternate links-->
-<link rel="alternate" href="https://goalwise.onrender.com/" hreflang="en" />
-
-<!--If your app uses custom web fonts-->
-<!--<link rel="preload" href="/fonts/custom-font.woff2" as="font" type="font/woff2" crossorigin="anonymous" />-->
-<title>GOAL WISE</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsBettingTips",
+    "name": "GOAL WISE",
+    "url": "https://goalwise.onrender.com/",
+    "description": "Expert football tips, VIP predictions, correct scores, live scores and betting odds for top leagues worldwide.",
+    "areaServed": "Kenya, Nigeria"
+  }
+  </script>
 </head>
 
 <body>
@@ -58,31 +59,20 @@
   <script type="module" src="/src/main.jsx"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(registration => {}).catch(error => {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch((error) => {
           console.error('Service Worker registration failed:', error);
         });
+      });
     }
+  </script>
 
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0A6847');
-    } else {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#059212');
-    }
-  </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16766305770">
-  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16766305770"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'AW-16766305770');
   </script>
 </body>
-
 </html>

@@ -1,13 +1,7 @@
-# Allow all bots
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /add-tip
+Disallow: /edit-tip
+Disallow: /users
 
-# Specify the sitemap location
 Sitemap: https://goalwise.onrender.com/sitemap.xml
-
-# (Optional) Restrict access to certain areas
-Disallow: /add-post/
-Disallow: /edit-post/
-Disallow: /add-tip/
-Disallow: /edit-tip/
-Disallow: /users/

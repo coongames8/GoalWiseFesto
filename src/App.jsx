@@ -27,6 +27,7 @@ import ProtectedAdminRoute from './utils/ProtectedAdminRoute';
 import { checkSubscriptionStatus } from './utils/subscription';
 import KoraPayments from './pages/Pay/KoraPayments';
 import Notification from './components/Notification/Notification';
+import InstallPrompt from './components/InstallPrompt/InstallPrompt';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -71,6 +72,7 @@ function App() {
           <Topbar />
           <Navbar />
           <Notification />
+          <InstallPrompt />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="subscribe" element={<ProtectedRoute><KoraPayments /></ProtectedRoute>} />
