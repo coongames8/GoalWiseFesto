@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './Auth.scss';
-import { registerUser } from '../../firebase';
+import { getUser, registerUser } from '../../firebase';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
-import { useSetRecoilState } from 'recoil';
-import { notificationState } from '../../recoil/atoms';
+import { notificationState, userState } from '../../recoil/atoms';
+import { useSetRecoilState , useRecoilState } from 'recoil'; // Add useRecoilState
 
 export const Register = () => {
     const [username, setUsername] = useState('');
@@ -13,11 +13,15 @@ export const Register = () => {
     const [password, setPassword] = useState('');
     const setNotification = useSetRecoilState(notificationState);
     const navigate = useNavigate();
+    const [user, setUser] = useRecoilState(userState); // Add this to get setUser
 
     const handleRegister = async (e) => {
         e.preventDefault();
         if (email && password) {
-          registerUser(username, email, password, setNotification, navigate); // Pass navigate
+            const refreshUser = async (email) => {
+                await getUser(email, setUser); // You'll need access to setUser
+            };
+            registerUser(username, email, password, setNotification, navigate, refreshUser); // Pass navigate
         } else {
           setNotification({
             isVisible: true,

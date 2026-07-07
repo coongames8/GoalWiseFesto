@@ -16,14 +16,24 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-export const signInUser = async (email, password, setNotification, navigate) => {
-  signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+export const signInUser = async (email, password, setNotification, navigate, refreshUser) => {
+  signInWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
     setNotification({
       isVisible: true,
       type: 'success',
       message: "Welcome Back!",
     });
-    navigate("/"); // Add redirect
+    //navigate("/"); // Add redirect
+
+    // Use window.location instead of navigate to force a full page reload
+    //window.location.href = "/";
+
+    // Refresh user data before navigating
+    if (refreshUser) {
+      await refreshUser(userCredential.user.email);
+    }
+  
+    navigate("/");    
   }).catch(async (error) => {
     const errorMessage = await error.message;
     setNotification({
@@ -34,7 +44,7 @@ export const signInUser = async (email, password, setNotification, navigate) => 
   });
 }
 
-export const registerUser = async (username, email, password, setNotification, navigate) => {
+export const registerUser = async (username, email, password, setNotification, navigate, refreshUser) => {
   createUserWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
     const user = userCredential.user;
     const userDocRef = doc(db, "users", user.email);
@@ -57,7 +67,17 @@ export const registerUser = async (username, email, password, setNotification, n
         type: 'success',
         message: `User with ${user.email} has been registered successfully`,
       });
-      navigate('/login'); // Add redirect here
+      //navigate('/login'); // Add redirect here
+
+      // Use window.location instead of navigate
+      //window.location.href = '/login';
+
+      // Refresh user data before navigating
+      if (refreshUser) {
+        await refreshUser(userCredential.user.email);
+      }
+    
+      navigate("/login");
     }).catch(async (error) => {
       const errorMessage = await error.message;
       setNotification({

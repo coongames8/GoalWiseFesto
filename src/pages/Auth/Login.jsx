@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './Auth.scss';
-import { signInUser, resetPassword } from '../../firebase';
+import { getUser, signInUser, resetPassword } from '../../firebase';
 import AppHelmet from '../AppHelmet';
 import ScrollToTop from '../ScrollToTop';
-import { notificationState } from '../../recoil/atoms';
-import { useSetRecoilState } from 'recoil';
+import { notificationState, userState } from '../../recoil/atoms';
+import { useSetRecoilState , useRecoilState } from 'recoil'; // Add useRecoilState
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -15,11 +15,15 @@ export const Login = () => {
     const [sending, setSending] = useState(false);
     const setNotification = useSetRecoilState(notificationState);
     const navigate = useNavigate();
+    const [user, setUser] = useRecoilState(userState); // Add this to get setUser
 
     const handleLogin = (e) => {
         e.preventDefault();
         if (email && password) {
-            signInUser(email, password, setNotification, navigate);
+            const refreshUser = async (email) => {
+                await getUser(email, setUser); // You'll need access to setUser
+            };
+            signInUser(email, password, setNotification, navigate, refreshUser);
         } else {
             setNotification({
                 isVisible: true,
