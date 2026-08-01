@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^10.3.0",
     "firebase": "^11.1.0",
     "kora-checkout": "^1.0.4",
     "react": "^18.3.1",
@@ -21,7 +22,8 @@
     "react-router-dom": "^7.1.1",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
-    "sass": "^1.83.1"
+    "sass": "^1.83.1",
+    "sweetalert2": "^11.26.25"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

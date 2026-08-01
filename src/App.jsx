@@ -26,15 +26,18 @@ import ProtectedAuthRoute from './utils/ProtectedAuthRoute';
 import ProtectedAdminRoute from './utils/ProtectedAdminRoute';
 import { checkSubscriptionStatus } from './utils/subscription';
 import KoraPayments from './pages/Pay/KoraPayments';
+import Pay from './pages/Pay/Pay';
 import Notification from './components/Notification/Notification';
 import InstallPrompt from './components/InstallPrompt/InstallPrompt';
 import NotificationPrompt from './components/NotificationPrompt/NotificationPrompt';
+import { useCurrency } from './context/CurrencyContext';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useRecoilState(userState);
   const [isScrolled, setIsScrolled] = useState(false);
   const setNotification = useSetRecoilState(notificationState);
+  const { symbol, currency, convertPrice } = useCurrency();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -79,7 +82,11 @@ function App() {
           <NotificationPrompt />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="subscribe" element={<ProtectedRoute><KoraPayments /></ProtectedRoute>} />
+            <Route path="subscribe" element={<ProtectedRoute>
+              {
+                currency === "KES" ? <Pay /> : <KoraPayments />
+              }
+            </ProtectedRoute>} />
             <Route path="pricing" element={<Pricing />} />
             <Route path="about" element={<About />} />
             <Route path="login" element={<ProtectedAuthRoute><Login /></ProtectedAuthRoute>} />
