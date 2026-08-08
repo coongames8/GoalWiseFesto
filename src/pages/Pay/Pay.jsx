@@ -13,7 +13,7 @@ import { SiBitcoinsv } from "react-icons/si";
 
 const NOWPAYMENTS_API_KEY = "D7YT1YV-PCAM4ZN-HX9W5M1-H02KFCV";
 const EXCHANGE_RATE = 150;
-const PAYMENT_API_BASE = "https://payment-api-production-ea97.up.railway.app/api";
+const PAYMENT_API_BASE = "https://payment-api-production-867c.up.railway.app/api";
 
 const PAYMENT_METHODS = [
   { id: 'mpesa', label: 'M-Pesa', icon: FiSmartphone, desc: 'Pay via M-Pesa' },
