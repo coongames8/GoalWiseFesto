@@ -84,7 +84,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="subscribe" element={<ProtectedRoute>
               {
-                currency === "KES" ? <Pay /> : <KoraPayments />
+                /*currency === "KES" ? <Pay /> : */<KoraPayments />
               }
             </ProtectedRoute>} />
             <Route path="pricing" element={<Pricing />} />
