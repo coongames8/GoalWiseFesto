@@ -116,7 +116,6 @@ export const updateUser = async (userId, isPremium, subscription, setNotificatio
   })
 }
 
-
 export const updateUserLocality = async (userId, locality) => {
   const usercollref = doc(db, 'users', userId)
   updateDoc(usercollref, {
