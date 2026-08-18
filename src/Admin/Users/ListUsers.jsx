@@ -14,6 +14,7 @@ const SORT_OPTIONS = [
     { value: 'name-asc', label: 'Name (A–Z)' },
     { value: 'name-desc', label: 'Name (Z–A)' },
     { value: 'premium-first', label: 'Premium first' },
+    { value: 'has-locality', label: 'Has Locality' },
 ];
 
 export default function ListUsers() {
@@ -53,6 +54,9 @@ export default function ListUsers() {
                 break;
             case 'premium-first':
                 sorted.sort((a, b) => (b.isPremium ? 1 : 0) - (a.isPremium ? 1 : 0));
+                break;
+            case 'has-locality':
+                sorted.sort((a, b) => (b.locality ? 1 : 0) - (a.locality ? 1 : 0));
                 break;
             default:
                 break;

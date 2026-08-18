@@ -56,14 +56,14 @@ function App() {
 
   useEffect(() => {
     checkSubscriptionStatus(user, setNotification);
-    recordWebsiteVisit(user.email, window.location.hostname);
   }, [user]);
 
   useEffect(() => {
     if (user && locality !== undefined) {
       checkLocality(user, locality);
+      recordWebsiteVisit(user.email, window.location.hostname);
     }
-    console.log(user);
+    //console.log(user);
   }, [user]); 
 
   useEffect(() => {

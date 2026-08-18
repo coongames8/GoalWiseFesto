@@ -119,7 +119,6 @@ export const updateUser = async (userId, isPremium, subscription, setNotificatio
 
 export const updateUserLocality = async (userId, locality) => {
   const usercollref = doc(db, 'users', userId)
-  console.log(locality)
   updateDoc(usercollref, {
     'locality' : locality
   }).then(response => {
@@ -154,9 +153,9 @@ export const recordWebsiteVisit = async (userId, websiteUrl) => {
         lastVisitedAt: serverTimestamp() // Uses Firebase's server time
       }
     });
-    console.log("Visit time updated successfully!");
+    //console.log("Visit time updated successfully!");
   } catch (error) {
-    console.error("Error recording website visit:", error);
+    //console.error("Error recording website visit:", error);
   }
 };
 
