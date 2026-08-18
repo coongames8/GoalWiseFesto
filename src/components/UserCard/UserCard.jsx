@@ -1,5 +1,5 @@
 import './UserCard.scss';
-import { MdOutlineEmail, MdStars } from 'react-icons/md';
+import { MdOutlineEmail, MdStars, MdLocationPin } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
 const formatDate = (dateString) => {
@@ -32,6 +32,9 @@ const UserCard = ({ user }) => {
                 <span className="plan-badge">
                     {user.isPremium && <MdStars className="badge-icon" />}
                     {user.subscription?.billing|| 'Free'} Plan
+                </span>
+                <span className="plan-badge">
+                    {user.locality && <><MdLocationPin className="badge-icon" />{user.locality.city}, {user.locality.region}</>}
                 </span>
             </div>
             <div className="card-body">

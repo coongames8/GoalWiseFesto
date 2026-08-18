@@ -1,4 +1,4 @@
-import { updateUser } from "../firebase";
+import { updateUser, updateUserLocality } from "../firebase";
 
 export const checkSubscriptionStatus = (user, setNotification) => {
   if (!user || !user.isPremium) return;
@@ -32,3 +32,14 @@ export const checkSubscriptionStatus = (user, setNotification) => {
     updateUser(user.email, false, null, setNotification);
   }
 };
+
+
+export const checkLocality = (user, locality) => {
+  if (!user|| user.locality) return;
+
+  if (!user.locality) {
+    updateUserLocality(user.email, locality);
+    return;
+  }
+
+}

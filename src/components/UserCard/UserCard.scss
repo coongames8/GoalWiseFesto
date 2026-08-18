@@ -29,6 +29,8 @@
         background: linear-gradient(135deg, var(--dark-blue), var(--deep-green));
         display: flex;
         align-items: center;
+        display: flex;
+        justify-content: space-between;
 
         .plan-badge {
             display: inline-flex;

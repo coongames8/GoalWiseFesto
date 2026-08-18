@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { notificationState, userState } from './recoil/atoms';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, getUser } from './firebase';
+import { auth, getUser, recordWebsiteVisit } from './firebase';
 import { IoArrowUp } from "react-icons/io5";
 
 import Topbar from './components/Topbar/Topbar';
@@ -24,7 +24,7 @@ import EditUser from './Admin/Users/EditUser';
 import ProtectedRoute from './utils/ProtectedRoute';
 import ProtectedAuthRoute from './utils/ProtectedAuthRoute';
 import ProtectedAdminRoute from './utils/ProtectedAdminRoute';
-import { checkSubscriptionStatus } from './utils/subscription';
+import { checkSubscriptionStatus, checkLocality } from './utils/subscription';
 import KoraPayments from './pages/Pay/KoraPayments';
 import Pay from './pages/Pay/Pay';
 import Notification from './components/Notification/Notification';
@@ -37,7 +37,7 @@ function App() {
   const [user, setUser] = useRecoilState(userState);
   const [isScrolled, setIsScrolled] = useState(false);
   const setNotification = useSetRecoilState(notificationState);
-  const { symbol, currency, convertPrice } = useCurrency();
+  const { symbol, currency, convertPrice, locality } = useCurrency();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -56,7 +56,15 @@ function App() {
 
   useEffect(() => {
     checkSubscriptionStatus(user, setNotification);
+    recordWebsiteVisit(user.email, window.location.hostname);
   }, [user]);
+
+  useEffect(() => {
+    if (user && locality !== undefined) {
+      checkLocality(user, locality);
+    }
+    console.log(user);
+  }, [user]); 
 
   useEffect(() => {
     const handleScroll = () => {

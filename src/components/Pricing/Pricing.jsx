@@ -1,7 +1,7 @@
 import './Pricing.scss';
 import { NavLink, useLocation } from 'react-router-dom';
 import { pricings } from '../../data';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCurrency } from '../../context/CurrencyContext';
 
 const BILLING_OPTIONS = [
@@ -13,7 +13,7 @@ const BILLING_OPTIONS = [
 export default function Pricing() {
     const [billing, setBilling] = useState('Day');
     const location = useLocation();
-    const { symbol, convertPrice } = useCurrency();
+    const { symbol, convertPrice} = useCurrency();
 
     return (
         <div className="pricing" id="pricing">
