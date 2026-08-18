@@ -136,7 +136,7 @@ export const updateUserLocality = async (userId, locality) => {
   })
 }
 
-export const recordWebsiteVisit = async (userId, websiteUrl) => {
+export const recordWebsiteVisit = async (userId, websiteUrl, device) => {
   if (!userId || !websiteUrl) return;
 
   // Clean the URL string so it doesn't contain '.' characters in the key name 
@@ -150,6 +150,7 @@ export const recordWebsiteVisit = async (userId, websiteUrl) => {
       // Overwrites or creates 'visitedWebsites.example_com' with the current time
       [`visitedWebsites.${safeWebKey}`]: {
         originalUrl: websiteUrl,
+        device,
         lastVisitedAt: serverTimestamp() // Uses Firebase's server time
       }
     });

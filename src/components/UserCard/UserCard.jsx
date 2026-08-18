@@ -1,5 +1,10 @@
 import './UserCard.scss';
-import { MdOutlineEmail, MdStars, MdLocationPin } from 'react-icons/md';
+import { MdOutlineEmail, MdStars, MdLocationPin, MdAndroid } from 'react-icons/md';
+import { RiMacbookFill } from "react-icons/ri";
+import { FaInternetExplorer } from "react-icons/fa";
+import { FaApple } from "react-icons/fa";
+import { FaWindows } from "react-icons/fa";
+import { FaLinux } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 const formatDate = (dateString) => {
@@ -38,11 +43,44 @@ const UserCard = ({ user }) => {
                 </span>
             </div>
             <div className="card-body">
-                <div className="username">@{user.username || user.email}</div>
+            <div className="username">
+                @{user.username || user.email}
+                {user.visitedWebsites && (() => {
+                    const firstWithDevice = Object.entries(user.visitedWebsites).find(
+                        ([key, value]) => value && value.device
+                    );
+
+                    const siteData = firstWithDevice ? firstWithDevice[1] : null;
+                    
+                    // This is the object: e.g., { device: 'iOS' } or similar
+                    const deviceObj = siteData ? siteData.device : null; 
+
+                    // Adjust 'deviceObj.type' or 'deviceObj.name' if the string lives under a different key
+                    const deviceName = deviceObj && typeof deviceObj === 'object' 
+                        ? (deviceObj.device || deviceObj.type || "").toLowerCase() : "";
+
+                    if (deviceName) {
+                        switch (deviceName) {
+                            case 'ios':
+                            case 'mac':
+                                return <FaApple />;
+                            case 'android':
+                                return <MdAndroid />;
+                            case 'windows':
+                                return <FaWindows />;
+                            case 'linux':
+                                return <FaLinux />;
+                            default:
+                                return <FaInternetExplorer />;
+                        }
+                    }
+                    return null; // Return null if no device match is found
+                })()}</div>
+
                 <div className="email">
                     <MdOutlineEmail className="mail" />
                     <span>{user.email}</span>
-                </div>
+                </div>                
                 {user.subscription && user.subscription.subDate && (
                     <div className="sub-date">Subscribed {formatDate(user.subscription.subDate)}</div>
                 )}

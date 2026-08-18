@@ -24,7 +24,7 @@ import EditUser from './Admin/Users/EditUser';
 import ProtectedRoute from './utils/ProtectedRoute';
 import ProtectedAuthRoute from './utils/ProtectedAuthRoute';
 import ProtectedAdminRoute from './utils/ProtectedAdminRoute';
-import { checkSubscriptionStatus, checkLocality } from './utils/subscription';
+import { checkSubscriptionStatus, checkLocality, getUserPlatform } from './utils/subscription';
 import KoraPayments from './pages/Pay/KoraPayments';
 import Pay from './pages/Pay/Pay';
 import Notification from './components/Notification/Notification';
@@ -61,9 +61,27 @@ function App() {
   useEffect(() => {
     if (user && locality !== undefined) {
       checkLocality(user, locality);
-      recordWebsiteVisit(user.email, window.location.hostname);
+      const device = getUserPlatform()
+      if (navigator.userAgentData) {
+        navigator.userAgentData.getHighEntropyValues([
+          "architecture", 
+          "model", 
+          "platformVersion", 
+          "fullVersionList"
+        ])
+        .then(info => {
+          //console.log(info.model);        // e.g., "Pixel 6" or "Galaxy S21"
+          //console.log(info.architecture); // e.g., "x86" or "arm"
+          //console.log(info.platformVersion); // e.g., "13.0.0"
+
+          recordWebsiteVisit(user.email, window.location.hostname, {device,...info});
+        });
+      }
+      
     }
+    
     //console.log(user);
+    
   }, [user]); 
 
   useEffect(() => {
