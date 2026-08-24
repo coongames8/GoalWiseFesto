@@ -18,22 +18,51 @@ export const auth = getAuth(app);
 
 export const signInUser = async (email, password, setNotification, navigate, refreshUser) => {
   signInWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
-    setNotification({
-      isVisible: true,
-      type: 'success',
-      message: "Welcome Back!",
-    });
-    //navigate("/"); // Add redirect
-
-    // Use window.location instead of navigate to force a full page reload
-    //window.location.href = "/";
-
-    // Refresh user data before navigating
-    if (refreshUser) {
-      await refreshUser(userCredential.user.email);
-    }
+    const user = userCredential.user;
+    const userDocRef = doc(db, "users", user.email);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      setNotification({
+        isVisible: true,
+        type: 'success',
+        message: "Welcome Back!",
+      });
   
-    navigate("/");    
+      if (refreshUser) {
+        await refreshUser(user.email);
+      }  
+      navigate("/"); 
+    } else {
+      return await setDoc(userDocRef, {
+        email: user.email,
+        username: user.email.split("@")[0],
+        isPremium: false,
+        subscription: null
+      }).then(async (response) => {
+        setNotification({
+          isVisible: true,
+          type: 'success',
+          message: "Welcome Back!",
+        });
+    
+        // Use window.location instead of navigate to force a full page reload
+        //window.location.href = "/";
+    
+        // Refresh user data before navigating
+        if (refreshUser) {
+          await refreshUser(userCredential.user.email);
+        }
+      
+        navigate("/"); 
+      }).catch(async (error) => {
+        const errorMessage = await error.message;
+        setNotification({
+          isVisible: true,
+          type: 'error',
+          message: errorMessage,
+        });
+      });
+    }
   }).catch(async (error) => {
     const errorMessage = await error.message;
     setNotification({

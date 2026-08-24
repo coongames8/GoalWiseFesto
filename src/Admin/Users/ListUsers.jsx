@@ -123,11 +123,15 @@ export default function ListUsers() {
             )}
             {!loading && filtered.length > 0 && (
                 <div className="list-users__grid">
-                    {filtered.map(user => (
-                        <UserCard key={user.email} user={user} />
-                    ))}
+                    {filtered.map(user => {
+                        /*if (sortBy === 'has-locality') {
+                            console.log(user.locality && user);
+                        }*/
+                        return <UserCard key={user.email} user={user} />;
+                    })}
                 </div>
             )}
+
         </div>
     );
 }
