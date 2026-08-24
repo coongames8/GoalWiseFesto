@@ -38,6 +38,7 @@ export default function EditUser() {
 
     useEffect(() => {
         if(user) {
+            console.log(user)
             setEmail(user.email)
             setUsername(user.username)
             setIsPremium(user.isPremium)
@@ -58,10 +59,10 @@ export default function EditUser() {
         updateDoc(usercollref,{
           isPremium, 
           subscription: !isPremium || subscription === "Free" ? null : {
-            billing: subscription === "Free" ? "" : subscription,
-            plan: subscription === "Free" ? "" : subscription.slice(0, -2),
+            billing: subscription === "Free" ? "" : (subscription === "Daily" ? "Day" : subscription.slice(0, -2)),
+            plan: subscription === "Free" ? "" : subscription,
             subDate
-          }         
+          } 
         } ).then(response => {
             setNotification({
                 isVisible: true,

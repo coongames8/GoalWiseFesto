@@ -36,7 +36,7 @@ const UserCard = ({ user }) => {
             <div className="card-header">
                 <span className="plan-badge">
                     {user.isPremium && <MdStars className="badge-icon" />}
-                    {user.subscription?.billing|| 'Free'} Plan
+                    {user.subscription?.plan|| 'Free'} Plan
                 </span>
                 <span className="plan-badge">
                     {user.locality && <><MdLocationPin className="badge-icon" />{user.locality.city}, {user.locality.region}</>}
