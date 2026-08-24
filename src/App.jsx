@@ -70,17 +70,11 @@ function App() {
           "fullVersionList"
         ])
         .then(info => {
-          //console.log(info.model);        // e.g., "Pixel 6" or "Galaxy S21"
-          //console.log(info.architecture); // e.g., "x86" or "arm"
-          //console.log(info.platformVersion); // e.g., "13.0.0"
-
           recordWebsiteVisit(user.email, window.location.hostname, {device,...info});
         });
       }
       
     }
-    
-    //console.log(user);
     
   }, [user]); 
 

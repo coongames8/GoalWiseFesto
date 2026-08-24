@@ -38,7 +38,6 @@ export default function EditUser() {
 
     useEffect(() => {
         if(user) {
-            console.log(user)
             setEmail(user.email)
             setUsername(user.username)
             setIsPremium(user.isPremium)

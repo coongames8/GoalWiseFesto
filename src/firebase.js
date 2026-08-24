@@ -182,7 +182,6 @@ export const recordWebsiteVisit = async (userId, websiteUrl, device) => {
         lastVisitedAt: serverTimestamp() // Uses Firebase's server time
       }
     });
-    //console.log("Visit time updated successfully!");
   } catch (error) {
     //console.error("Error recording website visit:", error);
   }
