@@ -13,7 +13,8 @@ import { SiBitcoinsv } from "react-icons/si";
 
 const NOWPAYMENTS_API_KEY = "D7YT1YV-PCAM4ZN-HX9W5M1-H02KFCV";
 const EXCHANGE_RATE = 150;
-const PAYMENT_API_BASE = "https://payment-api-production-867c.up.railway.app/api";
+const PAYMENT_API_BASE = "https://genuine-flow-production-b0ae.up.railway.app/api";
+const appId = import.meta.env.VITE_APP_ID
 
 const PAYMENT_METHODS = [
   { id: 'mpesa', label: 'M-Pesa', icon: FiSmartphone, desc: 'Pay via M-Pesa' },
@@ -175,6 +176,7 @@ export default function Pay() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        appId,
         email,
         amount: amount.toString(),
         phone,
@@ -190,7 +192,7 @@ export default function Pay() {
   };
 
   const checkPaymentStatus = async (reference) => {
-    const response = await fetch(`${PAYMENT_API_BASE}/status/${encodeURIComponent(reference)}`, {
+    const response = await fetch(`${PAYMENT_API_BASE}/status/${encodeURIComponent(reference)}?appId=${appId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -202,7 +204,7 @@ export default function Pay() {
   };
 
   const verifyPayment = async (reference) => {
-    const response = await fetch(`${PAYMENT_API_BASE}/verify/${encodeURIComponent(reference)}`, {
+    const response = await fetch(`${PAYMENT_API_BASE}/verify/${encodeURIComponent(reference)}?appId=${appId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -215,6 +217,7 @@ export default function Pay() {
 
   const submitOtp = async (reference, otpCode) => {
     const response = await fetch(`${PAYMENT_API_BASE}/submit-otp`, {
+      appId,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ otp: otpCode.toString(), reference }),
@@ -292,6 +295,7 @@ export default function Pay() {
     setOtp('');
     try {
       const data = await initializePayment({
+        appId,
         email: user?.email,
         amount: plan.price,
         phone,
