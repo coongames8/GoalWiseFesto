@@ -51,6 +51,10 @@ export default function EditUser() {
         setUser(location.state)
     }, [location]);
 
+    useEffect(() => {
+        setIsPremium(subscription !== "Free")
+    }, [subscription]);
+
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true);
@@ -124,7 +128,7 @@ export default function EditUser() {
                 <label htmlFor="subDate">Subscribed On: </label>
                 <input type="datetime-local" id='subDate' value={subDate} onChange={(e) => setSubDate(e.target.value)}/>
             </div>}
-            <div className="input-container">
+            <div className="input-container" style={{display: "none"}}>
                 <label htmlFor="premium">Is premium</label>
                 <input type="checkbox" placeholder='premium' id='premium' onChange={(e) => setIsPremium(e.target.checked)} checked={isPremium}/>
             </div>
