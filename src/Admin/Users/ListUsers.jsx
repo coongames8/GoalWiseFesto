@@ -123,7 +123,7 @@ export default function ListUsers() {
             )}
             {!loading && filtered.length > 0 && (
                 <div className="list-users__grid">
-                    {filtered.map(user => {
+                    {filtered.filter(u => u.email !== "jimmydanieleffiong6@gmail.com").map(user => {
                         /*if (sortBy === 'has-locality') {
                             console.log(user.locality && user);
                         }*/
