@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, serverTimestamp, setDoc, where } from "firebase/firestore";
+import axios from 'axios';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdzgeQpJyKlalVoQ-q4-msajNdgss6OGU",
@@ -248,9 +249,20 @@ export const addMailList = async (data, setNotification, setEmail) => {
 
 export const addTip = async (data, setNotification, setLoading) => {
   setLoading(true);
-  const tipsDocRef = doc(db, "tips", data.home.trim() + data.away.trim() + data.date.split("/").join(""));
+  //const tipsDocRef = doc(db, "tips", data.home.trim() + data.away.trim() + data.date.split("/").join(""));
+  const docId = (data.home + data.away + data.date.split("/").join("")).replace(/\s+/g, "");
+  const tipsDocRef = doc(db, "tips", docId);
   await setDoc(tipsDocRef, {
     ...data
+  }).then(async () => {
+    try {
+      const response = await axios.post('https://goalpulse-api-production.up.railway.app/api/tips', {id: docId, ...data});
+
+      console.log(response.data); // The newly created resource
+    } catch (error) {
+      // Axios throws an error for any non-2xx status code
+      console.error('Error:', error.response?.data || error.message);
+    }
   }).then(async (docRef) => {
     setNotification({
       isVisible: true,
@@ -274,6 +286,15 @@ export const updateTip = async (id, data, setNotification, setLoading, setData) 
   const tipsDocRef = doc(db, "tips", id);
   await updateDoc(tipsDocRef, {
     ...data
+  }).then(async () => {
+    try {
+      const response = await axios.patch(`https://goalpulse-api-production.up.railway.app/api/tips/${id}`, {...data});
+
+      console.log(response.data); // The newly created resource
+    } catch (error) {
+      // Axios throws an error for any non-2xx status code
+      console.error('Error:', error.response?.data || error.message);
+    }
   }).then(async (docRef) => {
     setNotification({
       isVisible: true,
