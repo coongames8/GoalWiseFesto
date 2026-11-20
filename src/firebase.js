@@ -257,8 +257,6 @@ export const addTip = async (data, setNotification, setLoading) => {
   }).then(async () => {
     try {
       const response = await axios.post('https://goalpulse-api-production.up.railway.app/api/tips', {id: docId, ...data});
-
-      console.log(response.data); // The newly created resource
     } catch (error) {
       // Axios throws an error for any non-2xx status code
       console.error('Error:', error.response?.data || error.message);
@@ -269,7 +267,7 @@ export const addTip = async (data, setNotification, setLoading) => {
       type: 'success',
       message: "tip added",
     });
-    window.location.replace(`/tips`);
+    window.location.replace(`/`);
   }).catch(async (error) => {
     setNotification({
       isVisible: true,
