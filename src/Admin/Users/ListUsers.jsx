@@ -17,7 +17,7 @@ const SORT_OPTIONS = [
     { value: 'has-locality', label: 'Has Locality' },
 ];
 
-export default function ListUsers() {
+export default function ListUsers({currentUser}) {
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState('');
@@ -127,7 +127,7 @@ export default function ListUsers() {
                         /*if (sortBy === 'has-locality') {
                             console.log(user.locality && user);
                         }*/
-                        return <UserCard key={user.email} user={user} />;
+                        return <UserCard key={user.email} user={user} currentUser={currentUser}/>;
                     })}
                 </div>
             )}

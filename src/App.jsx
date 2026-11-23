@@ -113,7 +113,7 @@ function App() {
             <Route path="register" element={<ProtectedAuthRoute><Register /></ProtectedAuthRoute>} />
             <Route path="add-tip" element={<ProtectedAdminRoute><AddTip /></ProtectedAdminRoute>} />
             <Route path="edit-tip" element={<ProtectedAdminRoute><EditTip /></ProtectedAdminRoute>} />
-            <Route path="users" element={<ProtectedAdminRoute><ListUsers /></ProtectedAdminRoute>} />
+            <Route path="users" element={<ProtectedAdminRoute><ListUsers currentUser={user}/></ProtectedAdminRoute>} />
             <Route path="users/:id" element={<ProtectedAdminRoute><EditUser /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
